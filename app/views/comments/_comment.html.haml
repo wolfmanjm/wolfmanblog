@@ -1,0 +1,30 @@
+%p= error_messages_for :comment
+ 
+= form(:action => "/posts/comment") do
+  = hidden_field :name => "postid", :value => post.id
+  .comment-box
+    #errors
+    #preview{ :style => "display: none" }
+    %table.frm-tbl{ :cellpadding => "4", :cellspacing => "0" }
+      %tr
+        %td
+          %p= label "Your name", :for => "comment[name]"
+        %td
+          = text_field :name => "comment[name]", :size => 20
+          %small
+            %a#leave_email{ :href => "#" } (leave url/email &#187;)
+      %tr#guest_url{ :style => "display:none;" }
+        %td
+          %p= label "Your blog", :for => "comment[url]"
+        %td= text_field :name => "comment[url]"
+      %tr#guest_email{ :style => "display:none;" }
+        %td
+          %p= label "Your email", :for => "comment[email]"
+        %td= text_field :name => "comment[email]"
+      %tr
+        %td
+          %p= label "Your message", :for => "comment[body]"
+        %td{ :valign => "top", :colspan => "2" }= text_area "", :name => "comment[body]"
+      %tr
+        %td#frm-btns{ :colspan => "2" }
+        %td#form-submit-button.button= submit "Submit"

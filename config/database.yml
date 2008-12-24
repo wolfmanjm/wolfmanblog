@@ -1,0 +1,17 @@
+---
+# This is a sample database file for the Sequel ORM
+:development: &defaults
+  :adapter: postgres
+  :database: sample1_development
+  :username: morris
+  :password: test
+  :host: localhost
+  #:socket: /tmp/mysql.sock
+
+:test:
+  <<: *defaults
+  :database: sample1_test
+
+:production:
+  <<: *defaults
+  :database: sample1_production

@@ -1,0 +1,74 @@
+pre {
+        background-color: #f1f1f3;
+        color: #112;
+        padding: 10px;
+        font-size: 1.1em;
+        overflow: auto;
+        margin: 4px 0px;
+                  width: 95%;
+}
+
+
+
+/* Syntax highlighting */
+pre .normal {}
+pre .comment { color: #005; font-style: italic; }
+pre .keyword { color: #A00; font-weight: bold; }
+pre .method { color: #077; }
+pre .class { color: #074; }
+pre .module { color: #050; }
+pre .punct { color: #447; font-weight: bold; }
+pre .symbol { color: #099; }
+pre .string { color: #944; background: #FFE; }
+pre .char { color: #F07; }
+pre .ident { color: #004; }
+pre .constant { color: #07F; }
+pre .regex { color: #B66; background: #FEF; }
+pre .number { color: #F99; }
+pre .attribute { color: #5bb; }
+pre .global { color: #7FB; }
+pre .expr { color: #227; }
+pre .escape { color: #277; }
+
+.terminal{padding:10px;margin:10px 0px;width: 90%;color:#0f0;background-color:#000;}
+
+/* layout (Extra wide content area, fixed width)
+----------------------------------------------- */
+#wrapper {
+margin: 0 auto;
+width: 980px;
+text-align: left;
+position: relative;
+min-height: 100%;
+}
+
+#blog-header {
+padding-bottom: 10px;
+}
+
+#main-wrapper {
+position: relative;
+width: 980px;
+}
+
+#main-content {
+float: left;
+margin: 0 0 10px 0;
+padding: 0;
+width: 750px;
+}
+
+#sidebar {
+padding: 7px 11px 0 10px;
+position: absolute;
+right: 0;
+top: 0;
+margin: 0 0 10px 0;
+width: 200px;
+}
+
+.post {
+margin: 0;
+padding: 1px 0 10px 0;
+border-bottom: 3px solid #CCE6FF;
+}

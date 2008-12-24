@@ -1,0 +1,6 @@
+%li[comment]
+  %cite
+    %strong= comment.name
+    = "said on " + comment.created_at.to_s
+    %br/
+    = comment.body

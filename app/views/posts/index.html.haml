@@ -1,0 +1,15 @@
+- for post in @posts
+  .post
+    %h1= link_to post.title, url(:post, post)
+    %p.auth
+      Posted by Jim Morris
+      %span.typo_date= "on " + post.created_at.to_s
+
+    = post.to_html
+    = link_to 'Show', url(:post, post)
+    |
+    = link_to 'Edit', url(:edit_post,  post)
+    |
+    = link_to 'Delete', url(:delete_post, post), :class => 'delete'
+ 
+= link_to 'New', url(:new_post)

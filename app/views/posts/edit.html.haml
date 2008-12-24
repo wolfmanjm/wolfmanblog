@@ -1,0 +1,9 @@
+= error_messages_for :post
+ 
+= form_for(@post, :action => url(:post, @post)) do
+  = partial :form
+  %p= submit "Update"
+ 
+= link_to 'Show', url(:post, @post)
+|
+= link_to 'Back', url(:post)

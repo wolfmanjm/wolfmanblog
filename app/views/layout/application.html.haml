@@ -1,0 +1,25 @@
+!!! Strict
+%html{ html_attrs("en_us") }
+  %head
+    %title
+      Wolfmans Blog
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }
+    %link{ :href => "/stylesheets/brighthouse.css", :rel => "stylesheet", :media => "screen", :type => "text/css", :charset => "utf-8" }
+    %link{ :href => "/stylesheets/local.css", :rel => "stylesheet", :media => "screen", :type => "text/css", :charset => "utf-8" }
+    %script{ :src => "/javascripts/jquery.js", :type => "text/javascript"}
+    %script{ :src => "/javascripts/application.js", :type => "text/javascript"}
+  %body
+    #wrapper
+      #blog-header
+        %h1= link_to "Wolfman's Howlings", url(:posts)
+        %h2 A programmers Blog about Ruby, Rails and a few other issues
+      #main-wrapper
+        #main-content
+          = catch_content :for_layout
+        #sidebar
+          = render_sidebars
+      #footer
+        %p
+          =link_to "Brighthouse", "http://www.height1percent.com/pages/brighthouse/"
+          theme by
+          =link_to "Richard White", "http://www.height1percent.com/"

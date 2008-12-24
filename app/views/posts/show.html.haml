@@ -1,0 +1,26 @@
+.post
+  %h2= @post.title
+  %p.auth
+    Posted by Jim Morris
+    %span.typo_date=  "on " + @post.created_at.to_s
+  = @post.to_html
+ 
+%br/
+%hr/
+
+-if @post.allow_comments or @post.comments.size > 0
+  %a{ :name => "comments" }
+  %h4.blueblk Comments
+  -unless @post.comments_closed
+    %p{:class => "postmetadata alt"}
+      %small
+        %a{ :href => "#respond" } Leave a response
+  %ol.comment-list#commentList
+    -if @post.comments.blank?
+      %li#dummy_comment{ :style => "display: none" }
+    -else
+      = partial "comments/show", :with => @post.comments.reverse, :as => :comment
+
+%hr/
+%a{ :name => "respond" }
+%p= partial("comments/comment", :with => @post, :as => :post)
