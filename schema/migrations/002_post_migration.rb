@@ -10,6 +10,7 @@ class PostMigration < Sequel::Migration
       text :body
       text :title
 	  text :author
+	  text :permalink
 	  boolean :allow_comments, :default => true
 	  boolean :comments_closed, :default => false
 	  timestamp :created_at, :null => false

@@ -11,5 +11,9 @@
     = link_to 'Edit', url(:edit_post,  post)
     |
     = link_to 'Delete', url(:delete_post, post), :class => 'delete'
- 
-= link_to 'New', url(:new_post)
+
+%p#pagination
+  Older posts:
+  = paginate(@posts.current_page, @posts.page_count, :inner_window => 5)
+
+/= link_to 'New', url(:new_post)

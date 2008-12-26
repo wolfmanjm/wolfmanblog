@@ -17,3 +17,4 @@ dependency "merb-exceptions", merb_gems_version
 
 #
 dependency "maruku"
+dependency "merb-pagination"

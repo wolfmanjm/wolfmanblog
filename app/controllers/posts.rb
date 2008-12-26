@@ -3,7 +3,8 @@ class Posts < Application
 
   # GET /posts
   def index
-    @posts = Post.all
+	page= params[:page] || "1"
+    @posts = Post.reverse_order(:created_at).paginate(page.to_i, 4)
     display @posts
   end
 
