@@ -17,7 +17,7 @@
         #main-content
           = catch_content :for_layout
         #sidebar
-          = render_sidebars
+          = partial "layout/sidebar", :with => sidebars, :as => :sidebar
       #footer
         %p
           =link_to "Brighthouse", "http://www.height1percent.com/pages/brighthouse/"
