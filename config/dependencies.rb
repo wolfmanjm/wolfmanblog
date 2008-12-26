@@ -16,5 +16,6 @@ dependency "merb-param-protection", merb_gems_version
 dependency "merb-exceptions", merb_gems_version
 
 #
-dependency "maruku"
+dependency "BlueCloth", :require_as => "bluecloth"
 dependency "merb-pagination"
+dependency "syntax"
