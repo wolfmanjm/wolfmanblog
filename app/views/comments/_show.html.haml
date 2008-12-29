@@ -2,5 +2,7 @@
   %cite
     %strong= comment.name
     = "said on " + comment.created_at.to_s
+    -if session.authenticated?
+      = delete_button url(:delete_comment, :commentid => comment), 'Delete', :class => 'delete'
     %br/
     = comment.body

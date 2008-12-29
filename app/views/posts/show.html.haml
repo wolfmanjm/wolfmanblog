@@ -4,9 +4,15 @@
     Posted by Jim Morris
     %span.typo_date=  "on " + @post.created_at.to_s
   ~ @post.to_html
- 
-%br/
-%hr/
+
+%p.meta
+  Posted in
+  = link_to " Category", '#'
+  %strong &nbsp;|&nbsp;
+  Tags
+  = link_to " Tags", '#'
+  %strong &nbsp;|&nbsp;
+  = num_comments(@post)
 
 -if @post.allow_comments or @post.comments.size > 0
   %a{ :name => "comments" }
@@ -21,6 +27,9 @@
     -else
       = partial "comments/show", :with => @post.comments.reverse, :as => :comment
 
-%hr/
 %a{ :name => "respond" }
 %p= partial("comments/comment", :with => @post, :as => :post)
+
+-if session.authenticated?
+  = link_to 'Edit', url(:edit_post,  @post)
+  = delete_button url(:delete_post, @post), 'Delete', :class => 'delete'

@@ -32,13 +32,17 @@ Merb::Router.prepare do
   resources :posts
 
   # Adds the required routes for merb-auth using the password slice
-  #slice(:merb_auth_slice_password, :name_prefix => nil, :path_prefix => "")
+  slice(:merb_auth_slice_password, :name_prefix => nil, :path_prefix => "")
+
+  match("/posts/comment/:commentid", :method => :delete).to(:controller => "posts", :action => "delete_comment").name(:delete_comment)
+  match("/posts/:id", :method => :delete).to(:controller => "posts", :action => "delete").name(:delete_post)
+  match("/posts/comment/:postid", :method => :post).to(:controller => "posts", :action => "comment").name(:add_comment)
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based
   # routes, you may want to comment/remove this line to prevent
   # clients from calling your create or destroy actions with a GET
-  default_routes
+  #default_routes
 
   # Change this for your home page to be available at /
   match('/').to(:controller => 'posts', :action =>'index')

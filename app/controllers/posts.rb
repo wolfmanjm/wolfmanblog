@@ -1,6 +1,7 @@
 class Posts < Application
   # provides :xml, :yaml, :js
-
+  before :ensure_authenticated, :exclude => [:index, :show, :comment]
+  
   # GET /posts
   def index
 	page= params[:page] || "1"
@@ -52,7 +53,7 @@ class Posts < Application
   end
 
   # DELETE /posts/:id
-  def delete(id)
+  def destroy(id)
     @post = Post[id]
     raise NotFound unless @post
     if @post.destroy
@@ -64,7 +65,6 @@ class Posts < Application
 
   # POST /posts/comment
   # adds a comment to the given post
-  # TODO could be done better with routing
   def comment
 	@post= Post[params[:postid]]
     raise NotFound unless @post
@@ -74,4 +74,11 @@ class Posts < Application
     redirect url(:post, @post)
   end
 
+  def delete_comment
+	id= params[:commentid]
+	comment= Comment[id]
+	post= comment.post
+	comment.destroy
+    redirect url(:post, post)
+  end
 end

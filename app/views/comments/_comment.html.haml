@@ -1,7 +1,6 @@
 %p= error_messages_for :comment
  
-= form(:action => "/posts/comment") do
-  = hidden_field :name => "postid", :value => post.id
+= form(:action => url(:add_comment, :postid => post)) do
   .comment-box
     #errors
     #preview{ :style => "display: none" }

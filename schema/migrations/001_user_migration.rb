@@ -8,8 +8,9 @@ class UserMigration < Sequel::Migration
     create_table :users do
       primary_key :id
       text :name
+      text :crypted_password
+      text :salt
 	  boolean :admin
-	  text :password
     end
   end
 
