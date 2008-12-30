@@ -15,8 +15,15 @@ Merb::Config.use do |c|
   c[:session_id_key] = '_wolfmanblog_session_id' # cookie session id key, defaults to "_session_id"
 end
 
+# Make the app's "lib" directory a place where ruby files get "require"d from
+$LOAD_PATH.unshift(Merb.root / "lib")
+
 Merb::BootLoader.before_app_loads do
   # This will get executed after dependencies have been loaded but before your app's classes have loaded.
+  # require everything in lib
+  Dir[Merb.root / 'lib' / '*.rb'].each do |ext|
+    require(ext)
+  end
 end
 
 Merb::BootLoader.after_app_loads do

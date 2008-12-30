@@ -4,6 +4,14 @@ class Post < Sequel::Model
   is :timestamped
   has_many :comments
 
+  validates do
+	presence_of :title, :body
+  end
+
+  before_create do
+	self.permalink= title.to_url
+  end
+
   def to_html
 	doc= BlueCloth::new(convert(body))
 	doc.to_html

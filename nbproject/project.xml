@@ -6,6 +6,7 @@
             <name>wolfmanblog</name>
             <source-roots>
                 <root id="src.dir"/>
+                <root id="src.lib.dir" name="Libraries"/>
                 <root id="src.config.dir" name="Config"/>
                 <root id="src.public.dir" name="Public"/>
                 <root id="src.schema.dir"/>

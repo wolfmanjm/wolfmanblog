@@ -19,3 +19,4 @@ dependency "merb-exceptions", merb_gems_version
 dependency "BlueCloth", :require_as => "bluecloth"
 dependency "merb-pagination"
 dependency "syntax"
+dependency 'sequel_timestamped'
