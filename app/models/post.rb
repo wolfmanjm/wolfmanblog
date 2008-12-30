@@ -9,6 +9,10 @@ class Post < Sequel::Model
 	doc.to_html
   end
 
+  def self.find_by_permalink(title)
+	filter(:permalink => title).first
+  end
+
   private
 
   # find <typo:code lang="ruby"> ... </typo:code> blocks and use syntax to convert the enclosed code to html

@@ -38,6 +38,10 @@ Merb::Router.prepare do
   match("/posts/:id", :method => :delete).to(:controller => "posts", :action => "delete").name(:delete_post)
   match("/posts/comment/:postid", :method => :post).to(:controller => "posts", :action => "comment").name(:add_comment)
 
+  # route old permalinks http://blog.wolfman.com/articles/2008/08/27/porting-xgps-to-qtopia-for-the-freerunner
+  match("/articles/:year/:month/:day/:title").to(:controller => "posts", :action => "show_by_old_permalink").name(:article)
+
+
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based
   # routes, you may want to comment/remove this line to prevent

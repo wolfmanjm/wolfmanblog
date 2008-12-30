@@ -16,6 +16,12 @@ class Posts < Application
     display @post
   end
 
+  def show_by_old_permalink(year, month, day, title)
+	@post= Post.find_by_permalink(title)
+    raise NotFound unless @post
+    display @post, :show
+  end
+
   # GET /posts/new
   def new
     only_provides :html
