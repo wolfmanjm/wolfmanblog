@@ -9,7 +9,7 @@ class Post < Sequel::Model
   end
 
   before_create do
-	self.permalink= title.to_url
+	self.permalink= title.to_url if title
   end
 
   def to_html
