@@ -61,7 +61,11 @@ EOS
 		{:title => "Categories", :body => str}
 	  end
 
+	  # TODO build tag cloud
 	  def sb_tags
+		str= "tags cloud"
+
+		{:title => "Tags", :body => str}
 
 	  end
 

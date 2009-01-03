@@ -42,6 +42,7 @@ Merb::Router.prepare do
   match("/articles/:year/:month/:day/:title").to(:controller => "posts", :action => "show_by_old_permalink").name(:article)
 
   match("/articles/category/:name").to(:controller => "posts", :action => "list_by_category").name(:category)
+  match("/articles/tag/:name").to(:controller => "posts", :action => "list_by_tag").name(:tag)
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based

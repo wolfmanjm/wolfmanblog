@@ -18,6 +18,15 @@ class Posts < Application
     display @posts, :index
   end
 
+  def list_by_tag(name)
+	page= params[:page] || "1"
+	c= Tag[:name => name]
+    raise NotFound unless c
+    pids = c.posts.collect{ |i| i.id}
+    @posts = Post.filter(:id => pids).reverse_order(:created_at).paginate(page.to_i, 4)
+    display @posts, :index
+  end
+
   # GET /posts/:id
   def show
     @post = Post[params[:id]]
