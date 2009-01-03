@@ -3,7 +3,7 @@ module Merb
 	# helpers defined here available to all views.
 
 	def sidebars
-	  [sb_google_search, sb_contact, sb_links, sb_categories, sb_ads1, sb_ads2]
+	  [sb_google_search, sb_contact, sb_links, sb_categories, sb_tags, sb_ads1, sb_ads2]
 	end
 
 	def sb_google_search
@@ -61,9 +61,20 @@ EOS
 		{:title => "Categories", :body => str}
 	  end
 
-	  # TODO build tag cloud
+	  # build tag cloud taken from typo
 	  def sb_tags
-		str= "tags cloud"
+		tags= Tag.find_all_with_article_counters(20)
+		total= tags.inject(0) {|total,tag| total += tag[:article_counter] }
+		average = total.to_f / tags.size.to_f
+		sizes = tags.inject({}) {|h,tag| h[tag[:name]] = (tag[:article_counter].to_f / average); h} # create a percentage
+		# apply a lower limit of 50% and an upper limit of 200%
+		sizes.each {|tag,size| sizes[tag] = [[2.0/3.0, size].max, 2].min * 100}
+
+		str= "<p style=\"overflow:hidden\">"
+		tags.sort{|x,y| x[:name] <=> y[:name]}.each do |tag|
+		  str += "<span style=\"font-size:#{sizes[tag[:name]]}%\"> #{link_to(tag[:name], url(:tag, tag[:name]))}</span>"
+		end
+		str += "</p>"
 
 		{:title => "Tags", :body => str}
 
