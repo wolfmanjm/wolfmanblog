@@ -41,6 +41,7 @@ Merb::Router.prepare do
   # route old permalinks http://blog.wolfman.com/articles/2008/08/27/porting-xgps-to-qtopia-for-the-freerunner
   match("/articles/:year/:month/:day/:title").to(:controller => "posts", :action => "show_by_old_permalink").name(:article)
 
+  match("/articles/category/:name").to(:controller => "posts", :action => "list_by_category").name(:category)
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based

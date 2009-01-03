@@ -7,10 +7,10 @@
 
 %p.meta
   Posted in
-  = link_to " Category", '#'
+  = categories(@post)
   %strong &nbsp;|&nbsp;
   Tags
-  = link_to " Tags", '#'
+  = tags(@post)
   %strong &nbsp;|&nbsp;
   = num_comments(@post)
 

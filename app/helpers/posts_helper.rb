@@ -8,5 +8,25 @@ module Merb
 		"no comments"
 	  end
 	end
+
+	# TODO make these links
+	def categories(post)
+	  l= []
+	  a= post.categories
+	  a.each do |i|
+		l << i.name
+	  end
+	  l.join(',')
+	end
+
+	# TODO make these links
+	def tags(post)
+	  l= []
+	  a= post.tags
+	  a.each do |i|
+		l << i.name
+	  end
+	  l.join(',')
+	end
   end
 end # Merb

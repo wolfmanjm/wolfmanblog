@@ -3,7 +3,9 @@ require 'syntax/convertors/html'
 class Post < Sequel::Model
   is :timestamped
   has_many :comments
-
+  many_to_many :tags
+  many_to_many :categories
+  
   validates do
 	presence_of :title, :body
   end

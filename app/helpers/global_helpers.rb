@@ -3,7 +3,7 @@ module Merb
 	# helpers defined here available to all views.
 
 	def sidebars
-	  [sb_google_search, sb_contact, sb_links, sb_ads1, sb_ads2]
+	  [sb_google_search, sb_contact, sb_links, sb_categories, sb_ads1, sb_ads2]
 	end
 
 	def sb_google_search
@@ -49,6 +49,20 @@ EOS
          <a href="http://www.linkedin.com/in/e4net" ><img src="http://www.linkedin.com/img/webpromo/btn_viewmy_160x33.gif" width="160" height="33" border="0" alt="View Jim Morris's profile on LinkedIn"></a>
 EOS
 		{:title => "Links", :body => str}
+	  end
+
+	  def sb_categories
+		str= "<ul id=\"categories\">"
+		Category.all do |c|
+		  str += "<li>#{link_to(c.name, url(:category, c.name))} <em>(#{c.count})</em></li>"
+		end
+		str += "</ul>"
+
+		{:title => "Categories", :body => str}
+	  end
+
+	  def sb_tags
+
 	  end
 
 	  def sb_ads1

@@ -1,12 +1,21 @@
 class Posts < Application
   # provides :xml, :yaml, :js
-  before :ensure_authenticated, :exclude => [:index, :show, :comment]
+  before :ensure_authenticated, :exclude => [:index, :show, :comment, :list_by_category, :show_by_old_permalink]
   
   # GET /posts
   def index
 	page= params[:page] || "1"
     @posts = Post.reverse_order(:created_at).paginate(page.to_i, 4)
     display @posts
+  end
+
+  def list_by_category(name)
+	page= params[:page] || "1"
+	c= Category[:name => name]
+    raise NotFound unless c
+    pids = c.posts.collect{ |i| i.id}
+    @posts = Post.filter(:id => pids).reverse_order(:created_at).paginate(page.to_i, 4)
+    display @posts, :index
   end
 
   # GET /posts/:id
