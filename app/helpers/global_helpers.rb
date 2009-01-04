@@ -3,7 +3,7 @@ module Merb
 	# helpers defined here available to all views.
 
 	def sidebars
-	  [sb_google_search, sb_contact, sb_links, sb_categories, sb_tags, sb_ads1, sb_ads2]
+	  [sb_google_search, sb_contact, sb_links, sb_categories, sb_tags, sb_recent_comments, sb_index, sb_ads1, sb_ads2]
 	end
 
 	def sb_google_search
@@ -78,6 +78,33 @@ EOS
 
 		{:title => "Tags", :body => str}
 
+	  end
+
+	  def sb_recent_comments
+		str= "<div><ul>"
+		comments= Comment.limit(10).order(:created_at.desc)
+        for comment in comments
+          str += "<li>"
+          title = ''; title << 'by ' + comment.name
+          title << ' on ' + comment.post.title
+          str += link_to(h(title), url(:post, comment.post, :fragment => 'comments'))
+          str += "</li>"
+		end
+		str += "</ul></div>"
+ 	    {:title => "Recent comments", :body => str}
+	  end
+
+	  def sb_index
+		str= "<div style=\"height:400px;width:250px;overflow:scroll;\">"
+		str += "<ul>"
+		posts= Post.order(:title)
+        for post in posts
+          str += "<li>"
+          str += link_to(post.title, url(:post, post))
+          str += "<br /></li>"
+		end
+		str += "</ul></div>"
+ 	    {:title => "Article Index", :body => str}
 	  end
 
 	  def sb_ads1
