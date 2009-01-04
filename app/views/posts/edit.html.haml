@@ -1,4 +1,6 @@
-= error_messages_for :post
+%h1 Edit Post
+
+%p= error_messages_for @post
  
 = form_for(@post, :action => url(:post, @post)) do
   = partial :form

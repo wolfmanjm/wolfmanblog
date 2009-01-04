@@ -50,9 +50,10 @@ class Posts < Application
   # POST /posts
   def create
     @post = Post.new(params[:post])
-    if @post.save
+	begin
+	  @post.save
       redirect url(:post, @post)
-    else
+    rescue
       render :new
     end
   end
@@ -69,10 +70,11 @@ class Posts < Application
   def update
     @post = Post[params[:id]]
     raise NotFound unless @post
-    if @post.update(params[:post])
+	begin
+      @post.update(params[:post])
       redirect url(:post, @post)
-    else
-      raise BadRequest
+    rescue
+      render :edit
     end
   end
 
