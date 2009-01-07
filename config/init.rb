@@ -15,6 +15,8 @@ Merb::Config.use do |c|
   c[:session_id_key] = '_wolfmanblog_session_id' # cookie session id key, defaults to "_session_id"
 end
 
+Merb.add_mime_type :rss, nil, %w[text/xml]
+
 # Make the app's "lib" directory a place where ruby files get "require"d from
 $LOAD_PATH.unshift(Merb.root / "lib")
 

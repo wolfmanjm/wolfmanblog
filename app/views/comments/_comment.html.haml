@@ -1,4 +1,4 @@
-= form(:action => url(:add_comment, :postid => post)) do
+= form(:action => url(:add_comment, :postid => post), :id => 'commentform', :class => 'commentform') do
   .comment-box
     #errors
     #preview{ :style => "display: none" }

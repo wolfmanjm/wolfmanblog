@@ -15,3 +15,8 @@ $(document).ready(function() {
   });
 });
 
+//$(document).ready(function() {
+//    $('#commentform').ajaxForm(function() {
+//        alert("Thank you for your comment!");
+//    });
+//});

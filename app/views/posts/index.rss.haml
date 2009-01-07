@@ -1,0 +1,17 @@
+!!! XML
+%rss{:version => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/"}
+  %channel
+    %title Wolfmans Howlings
+    %link http://blog.wolfman.com
+    %description A programmers Blog about Ruby, Rails and a few other issue
+    %language en-us
+    %ttl 40
+
+    - @posts.each do |a|
+      %item
+        %title= a.title
+        %description~ h a.to_html
+        %author Jim Morris
+        %pubDate= a.updated_at
+        %link= url(:post, a)
+        %guid= url(:post, a) + "/" + a.updated_at.to_i.to_s

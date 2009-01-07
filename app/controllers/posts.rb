@@ -1,5 +1,7 @@
 class Posts < Application
   # provides :xml, :yaml, :js
+  provides :rss
+
   before :ensure_authenticated, :exclude => [:index, :show, :comment, :list_by_category, :show_by_old_permalink]
   
   # GET /posts
@@ -82,10 +84,11 @@ class Posts < Application
   def destroy(id)
     @post = Post[id]
     raise NotFound unless @post
-    if @post.destroy
-      redirect url(:posts)
-    else
-      raise BadRequest
+	begin
+      @post.destroy
+      redirect url(:posts, :message => {:notice =>"Post deleted"})
+	rescue
+      raise NotFound
     end
   end
 
@@ -98,9 +101,9 @@ class Posts < Application
     @comment = Comment.new(params[:comment])
 	begin
 	  @post.add_comment(@comment)
-	  redirect url(:post, @post, :fragment => 'comments')
+	  redirect url(:post, @post, {:fragment => 'comments', :message => {:notice =>"Comment deleted"}})
 	rescue
-	  err= @comment.errors.full_messages
+	  #err= @comment.errors.full_messages
 	  redirect url(:post, @post, {:fragment => 'respond', :message => {:notice =>"try again"}})
 	end
   end
