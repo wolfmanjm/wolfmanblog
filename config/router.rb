@@ -44,6 +44,10 @@ Merb::Router.prepare do
   match("/articles/category/:name").to(:controller => "posts", :action => "list_by_category").name(:category)
   match("/articles/tag/:name").to(:controller => "posts", :action => "list_by_tag").name(:tag)
 
+  # route old rss feeds
+#  match("/xml/rss20/comments/feed.xml").to(:controller => "posts", :action => "comments_feed")
+#  match("/xml/rss20/feed.xml").to(:controller => "posts", :action => "index", :format => :rss)
+
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based
   # routes, you may want to comment/remove this line to prevent

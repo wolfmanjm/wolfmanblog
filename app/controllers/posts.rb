@@ -1,11 +1,11 @@
 class Posts < Application
   # provides :xml, :yaml, :js
-  provides :rss
 
   before :ensure_authenticated, :exclude => [:index, :show, :comment, :list_by_category, :show_by_old_permalink]
   
   # GET /posts
   def index
+	provides :rss
 	page= params[:page] || "1"
     @posts = Post.reverse_order(:created_at).paginate(page.to_i, 4)
     display @posts
@@ -81,10 +81,12 @@ class Posts < Application
   end
 
   # DELETE /posts/:id
+  # TODO need to delete comments first
   def destroy(id)
     @post = Post[id]
     raise NotFound unless @post
 	begin
+	  Comment.delete_comments_for_post(@post.id)
       @post.destroy
       redirect url(:posts, :message => {:notice =>"Post deleted"})
 	rescue
@@ -114,5 +116,11 @@ class Posts < Application
 	post= comment.post
 	comment.destroy
     redirect url(:post, post)
+  end
+
+  def comments_feed
+	provides :rss
+	@comments= Comment.reverse_order(:created_at).limit(10)
+    display @comments
   end
 end
