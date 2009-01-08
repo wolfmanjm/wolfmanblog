@@ -81,7 +81,6 @@ class Posts < Application
   end
 
   # DELETE /posts/:id
-  # TODO need to delete comments first
   def destroy(id)
     @post = Post[id]
     raise NotFound unless @post
@@ -94,33 +93,4 @@ class Posts < Application
     end
   end
 
-  # POST /posts/comment
-  # adds a comment to the given post
-  def comment
-	@post= Post[params[:postid]]
-    raise NotFound unless @post
-
-    @comment = Comment.new(params[:comment])
-	begin
-	  @post.add_comment(@comment)
-	  redirect url(:post, @post, {:fragment => 'comments', :message => {:notice =>"Comment deleted"}})
-	rescue
-	  #err= @comment.errors.full_messages
-	  redirect url(:post, @post, {:fragment => 'respond', :message => {:notice =>"try again"}})
-	end
-  end
-
-  def delete_comment
-	id= params[:commentid]
-	comment= Comment[id]
-	post= comment.post
-	comment.destroy
-    redirect url(:post, post)
-  end
-
-  def comments_feed
-	provides :rss
-	@comments= Comment.reverse_order(:created_at).limit(10)
-    display @comments
-  end
 end

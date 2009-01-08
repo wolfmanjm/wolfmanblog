@@ -34,9 +34,11 @@ Merb::Router.prepare do
   # Adds the required routes for merb-auth using the password slice
   slice(:merb_auth_slice_password, :name_prefix => nil, :path_prefix => "")
 
-  match("/posts/comment/:commentid", :method => :delete).to(:controller => "posts", :action => "delete_comment").name(:delete_comment)
   match("/posts/:id", :method => :delete).to(:controller => "posts", :action => "delete").name(:delete_post)
-  match("/posts/comment/:postid", :method => :post).to(:controller => "posts", :action => "comment").name(:add_comment)
+
+  match("/comments/:commentid", :method => :delete).to(:controller => "comments", :action => "delete").name(:delete_comment)
+  match("/comments/:postid", :method => :post).to(:controller => "comments", :action => "create").name(:add_comment)
+  match("/comments(\.:format)").to(:controller => "comments", :action => "index")
 
   # route old permalinks http://blog.wolfman.com/articles/2008/08/27/porting-xgps-to-qtopia-for-the-freerunner
   match("/articles/:year/:month/:day/:title").to(:controller => "posts", :action => "show_by_old_permalink").name(:article)
@@ -45,7 +47,7 @@ Merb::Router.prepare do
   match("/articles/tag/:name").to(:controller => "posts", :action => "list_by_tag").name(:tag)
 
   # route old rss feeds
-#  match("/xml/rss20/comments/feed.xml").to(:controller => "posts", :action => "comments_feed")
+#  match("/xml/rss20/comments/feed.xml").to(:controller => "comments", :action => "index")
 #  match("/xml/rss20/feed.xml").to(:controller => "posts", :action => "index", :format => :rss)
 
   # This is the default route for /:controller/:action/:id
