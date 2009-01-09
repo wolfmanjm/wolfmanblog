@@ -1,3 +1,4 @@
+# TODO create guid on creation
 class Comment < Sequel::Model
   is :timestamped
   belongs_to :post

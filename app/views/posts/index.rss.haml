@@ -12,6 +12,6 @@
         %title= a.title
         %description~ h a.to_html
         %author Jim Morris
-        %pubDate= a.updated_at
-        %link= url(:post, a)
-        %guid= url(:post, a) + "/" + a.updated_at.to_i.to_s
+        %pubDate= a.updated_at.rfc822
+        %link= absolute_url(:post, a)
+        %guid= "urn:uuid:#{a.guid}"

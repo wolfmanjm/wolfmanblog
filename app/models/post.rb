@@ -1,5 +1,6 @@
 require 'syntax/convertors/html'
 
+# TODO create guid on creation
 class Post < Sequel::Model
   is :timestamped
   has_many :comments

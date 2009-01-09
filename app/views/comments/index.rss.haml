@@ -1,16 +1,16 @@
 !!! XML
 %rss{:version => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/"}
   %channel
-    %title Wolfmans Howlings
+    %title Wolfmans Howlings comments
     %link http://blog.wolfman.com
     %description A programmers Blog about Ruby, Rails and a few other issue
     %language en-us
     %ttl 40
 
-    - @comments.each do |a|
+    - @comments.each do |c|
       %item
-        %description= h a.body
-        %author= h a.name
-        %pubDate= a.updated_at
-        %link= url(:post, a, :fragment => 'comments')
-        %guid= url(:post, a) + "/" + a.updated_at.to_i.to_s
+        %title= "\"#{c.post.title}\" by #{h c.name}"
+        %description= h c.body
+        %pubDate= c.updated_at.rfc822
+        %link= absolute_url(:post, c.post, :fragment => "comment-#{c.id}")
+        %guid{:isPermaLink => 'false'}= "urn:uuid:#{c.guid}"

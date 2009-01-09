@@ -11,6 +11,7 @@ class CommentMigration < Sequel::Migration
       text :body, :null => false
 	  text :email
 	  text :url
+	  text :guid
       foreign_key :post_id, :posts, :null => false
       timestamp :created_at, :null => false
       timestamp :updated_at, :null => false
