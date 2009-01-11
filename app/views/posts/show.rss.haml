@@ -1,13 +1,20 @@
 !!! XML
 %rss{:version => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/"}
   %channel
-    %title Wolfmans Howlings comments
-    %link http://blog.wolfman.com
+    %title= "Wolfmans Howlings: #{@post.title}"
+    %link= absolute_url(:post, @post)
     %description A programmers Blog about Ruby, Rails and a few other issue
     %language en-us
     %ttl 40
 
-    - @comments.each do |c|
+    %item
+      %title= @post.title
+      %description~ h @post.to_html
+      %author Jim Morris
+      %pubDate= @post.created_at.rfc822
+      %link= absolute_url(:post, @post)
+      %guid{:isPermaLink => 'false'}= "urn:uuid:#{@post.guid}"
+    - @post.comments.each do |c|
       %item
         %title= "\"#{c.post.title}\" by #{h c.name}"
         %description= h c.body

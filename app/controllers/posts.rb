@@ -31,6 +31,7 @@ class Posts < Application
 
   # GET /posts/:id
   def show
+	provides :rss
     @post = Post[params[:id]]
     raise NotFound unless @post
     display @post

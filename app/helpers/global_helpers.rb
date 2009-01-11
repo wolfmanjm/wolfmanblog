@@ -3,7 +3,16 @@ module Merb
 	# helpers defined here available to all views.
 
 	def sidebars
-	  [sb_google_search, sb_contact, sb_links, sb_categories, sb_tags, sb_recent_comments, sb_index, sb_ads1, sb_ads2]
+	  [sb_google_search, sb_contact, sb_links, sb_syndicate, sb_categories, sb_tags, sb_recent_comments, sb_index, sb_ads1, sb_ads2]
+	end
+
+	def sb_syndicate
+	  str= "<ul id=\"syndicate\">"
+	  str += "<li>#{link_to('Articles', url(:posts, :format => 'rss'))}</li>"
+	  str += "<li>#{link_to('Comments', url(:comments, :format => 'rss'))}</li>"
+	  str += "</ul>"
+
+	  {:title => "Syndicate via RSS", :body => str}
 	end
 
 	def sb_google_search

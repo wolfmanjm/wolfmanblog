@@ -26,6 +26,8 @@
       %li#dummy_comment{ :style => "display: none" }
     -else
       = partial "comments/show", :with => @post.comments.reverse, :as => :comment
+%p{:class => "postmetadata alt"}
+  %small= link_to('RSS feed for this post', url(:post, @post, :format => 'rss'), :title => 'RSS Feed')
 
 %a{ :name => "respond" }
 

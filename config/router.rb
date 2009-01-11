@@ -38,7 +38,7 @@ Merb::Router.prepare do
 
   match("/comments/:commentid", :method => :delete).to(:controller => "comments", :action => "delete").name(:delete_comment)
   match("/comments/:postid", :method => :post).to(:controller => "comments", :action => "create").name(:add_comment)
-  match("/comments(\.:format)").to(:controller => "comments", :action => "index")
+  match("/comments(\.:format)").to(:controller => "comments", :action => "index").name(:comments)
 
   # route old permalinks http://blog.wolfman.com/articles/2008/08/27/porting-xgps-to-qtopia-for-the-freerunner
   match("/articles/:year/:month/:day/:title").to(:controller => "posts", :action => "show_by_old_permalink").name(:article)
