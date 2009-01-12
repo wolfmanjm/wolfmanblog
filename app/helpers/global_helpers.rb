@@ -62,7 +62,7 @@ EOS
 
 	  def sb_categories
 		str= "<ul id=\"categories\">"
-		Category.all do |c|
+		Category.eager(:posts).all do |c|
 		  str += "<li>#{link_to(c.name, url(:category, c.name))} <em>(#{c.count})</em></li>"
 		end
 		str += "</ul>"
@@ -91,10 +91,10 @@ EOS
 
 	  def sb_recent_comments
 		str= "<div><ul>"
-		comments= Comment.limit(10).order(:created_at.desc)
+		comments= Comment.limit(10).order(:created_at.desc).eager(:post).all
         for comment in comments
           str += "<li>"
-          title = ''; title << 'by ' + comment.name
+          title = ''; title << 'by ' + h(comment.name)
           title << ' on ' + comment.post.title
           str += link_to(h(title), url(:post, comment.post, :fragment => 'comments'))
           str += "</li>"

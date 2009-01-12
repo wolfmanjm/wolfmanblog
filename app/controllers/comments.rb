@@ -5,13 +5,15 @@ class Comments < Application
   # POST /comments
   # adds a comment to the given post
   def create
+	raise NotHuman unless params[:test] =~ /no/i
+	
 	@post= Post[params[:postid]]
     raise NotFound unless @post
 
     @comment = Comment.new(params[:comment])
 	begin
 	  @post.add_comment(@comment)
-	  redirect url(:post, @post, {:fragment => 'comments', :message => {:notice =>"Comment deleted"}})
+	  redirect url(:post, @post, {:fragment => 'comments'})
 	rescue
 	  #err= @comment.errors.full_messages
 	  redirect url(:post, @post, {:fragment => 'respond', :message => {:notice =>"try again"}})

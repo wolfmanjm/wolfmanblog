@@ -1,6 +1,5 @@
 require 'syntax/convertors/html'
 
-# TODO create guid on creation
 class Post < Sequel::Model
   is :timestamped
   has_many :comments
@@ -13,6 +12,7 @@ class Post < Sequel::Model
 
   before_create do
 	self.permalink= title.to_url if title
+	self.guid= UUID.random_create
   end
 
   def to_html

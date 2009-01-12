@@ -10,4 +10,11 @@ class Exceptions < Merb::Controller
     render :format => :html
   end
 
+  def not_human
+	render :format => :html
+  end
+
+end
+
+class NotHuman < Merb::ControllerExceptions::NotFound
 end

@@ -15,9 +15,10 @@ dependency "merb-auth-slice-password", merb_gems_version
 dependency "merb-param-protection", merb_gems_version
 dependency "merb-exceptions", merb_gems_version
 dependency "merb-more", merb_gems_version
-
+dependency 'merb_sequel'
 #
 dependency "BlueCloth", :require_as => "bluecloth"
 dependency "merb-pagination"
 dependency "syntax"
 dependency 'sequel_timestamped'
+dependency 'uuidtools'

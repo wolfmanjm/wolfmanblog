@@ -3,7 +3,7 @@ module Merb
 	def num_comments(post)
 	  n= post.comments.size
 	  if n > 0
-		link_to "#{n.to_s} comments", url(:post, post)
+		link_to "#{n.to_s} comments", url(:post, post, :fragment => 'comments')
 	  else
 		"no comments"
 	  end

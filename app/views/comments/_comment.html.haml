@@ -23,5 +23,9 @@
           %p= label "Your message", :for => "comment[body]"
         %td{ :valign => "top", :colspan => "2" }= text_area "", :name => "comment[body]"
       %tr
+        %td
+          %p= label "Are you a Spambot<br\>(hint: type no)", :for => "test"
+        %td= text_field :test
+      %tr
         %td#frm-btns{ :colspan => "2" }
         %td#form-submit-button.button= submit "Submit"
