@@ -20,5 +20,5 @@ dependency 'merb_sequel'
 dependency "BlueCloth", :require_as => "bluecloth"
 dependency "merb-pagination"
 dependency "syntax"
-dependency 'sequel_timestamped'
+#dependency 'sequel_timestamped'
 dependency 'uuidtools'
