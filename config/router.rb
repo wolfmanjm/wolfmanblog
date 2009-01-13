@@ -25,6 +25,8 @@
 # You can also use regular expressions, deferred routes, and many other options.
 # See merb/specs/merb/router.rb for a fairly complete usage sample.
 
+# TODO add old rss feed requests
+
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do
   # RESTful routes
@@ -47,8 +49,9 @@ Merb::Router.prepare do
   match("/articles/tag/:name").to(:controller => "posts", :action => "list_by_tag").name(:tag)
 
   # route old rss feeds
-#  match("/xml/rss20/comments/feed.xml").to(:controller => "comments", :action => "index")
-#  match("/xml/rss20/feed.xml").to(:controller => "posts", :action => "index", :format => :rss)
+  match("/xml/rss20/comments/feed.xml").to(:controller => "comments", :action => "index", :format => :rss)
+  match("/xml/rss20/feed.xml").to(:controller => "posts", :action => "index", :format => :rss)
+  match("/xml/rss20/article/:id/feed.xml").to(:controller => "posts", :action => "show", :format => :rss)
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based
