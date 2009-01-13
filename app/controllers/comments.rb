@@ -30,7 +30,7 @@ class Comments < Application
 
   def index
 	provides :rss
-	@comments= Comment.reverse_order(:created_at).limit(10)
+	@comments= Comment.reverse_order(:created_at).limit(10).eager(:post).all
     display @comments
   end
 

@@ -20,6 +20,10 @@ class Post < Sequel::Model
 	doc.to_html
   end
 
+  def comments_size
+	Comment.filter(:post_id => id).count
+  end
+
   def self.find_by_permalink(title)
 	filter(:permalink => title).first
   end

@@ -25,8 +25,6 @@
 # You can also use regular expressions, deferred routes, and many other options.
 # See merb/specs/merb/router.rb for a fairly complete usage sample.
 
-# TODO add old rss feed requests
-
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do
   # RESTful routes
