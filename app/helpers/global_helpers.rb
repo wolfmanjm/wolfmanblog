@@ -97,7 +97,7 @@ EOS
           str += "<li>"
           title = ''; title << 'by ' + h(comment.name)
           title << ' on ' + comment.post.title
-          str += link_to(h(title), url(:post, comment.post, :fragment => 'comments'))
+          str += link_to(h(title), url(:post, comment.post, :fragment => "comment-#{comment.id}"))
           str += "</li>"
 		end
 		str += "</ul></div>"
