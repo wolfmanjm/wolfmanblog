@@ -22,3 +22,6 @@ alt/*
 .proj_tree_state.yaml
 *.bak
 *.asv
+Capfile
+config/deploy.rb
+wolfmanblog.conf

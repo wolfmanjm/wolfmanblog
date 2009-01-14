@@ -89,6 +89,7 @@ EOS
 
 	  end
 
+	  # TODO make fragment point to actual comment
 	  def sb_recent_comments
 		str= "<div><ul>"
 		comments= Comment.limit(10).order(:created_at.desc).eager(:post).all
