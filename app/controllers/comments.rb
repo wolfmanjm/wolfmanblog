@@ -5,7 +5,10 @@ class Comments < Application
   # POST /comments
   # adds a comment to the given post
   def create
-	raise NotHuman unless params[:test] =~ /no/i
+	unless params[:test] =~ /no/i
+	  Merb.logger.error "spam comment: #{params.inspect}"
+	  raise NotHuman
+	end
 	
 	@post= Post[params[:postid]]
     raise NotFound unless @post

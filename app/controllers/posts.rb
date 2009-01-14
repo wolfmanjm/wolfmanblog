@@ -52,9 +52,12 @@ class Posts < Application
 
   # POST /posts
   def create
-    @post = Post.new(params[:post])
+    @post= Post.new
+	@post.title= params[:post][:title]
+	@post.body= params[:post][:body]
 	begin
 	  @post.save
+	  @post.update_categories_and_tags(params[:post][:categories_csv], params[:post][:tags_csv])
       redirect url(:post, @post)
     rescue
       render :new
@@ -73,8 +76,10 @@ class Posts < Application
   def update
     @post = Post[params[:id]]
     raise NotFound unless @post
+
 	begin
-      @post.update(params[:post])
+      @post.update(:title => params[:post][:title], :body => params[:post][:body])
+	  @post.update_categories_and_tags(params[:post][:categories_csv], params[:post][:tags_csv])
       redirect url(:post, @post)
     rescue
       render :edit
@@ -87,6 +92,8 @@ class Posts < Application
     raise NotFound unless @post
 	begin
 	  Comment.delete_comments_for_post(@post.id)
+	  @post.remove_all_tags
+	  @post.remove_all_categories
       @post.destroy
       redirect url(:posts, :message => {:notice =>"Post deleted"})
 	rescue

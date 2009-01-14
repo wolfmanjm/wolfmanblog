@@ -14,6 +14,10 @@
   %strong &nbsp;|&nbsp;
   = num_comments(@post)
 
+-if session.authenticated?
+  = link_to 'Edit', url(:edit_post,  @post)
+  = delete_button url(:delete_post, @post), 'Delete', :class => 'delete'
+
 -if @post.allow_comments or @post.comments.size > 0
   %a{ :name => "comments" }
   %h4.blueblk Comments
@@ -33,6 +37,3 @@
 
 %p= partial("comments/comment", :with => @post, :as => :post)
 
--if session.authenticated?
-  = link_to 'Edit', url(:edit_post,  @post)
-  = delete_button url(:delete_post, @post), 'Delete', :class => 'delete'

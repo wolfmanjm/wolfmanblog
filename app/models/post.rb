@@ -28,6 +28,33 @@ class Post < Sequel::Model
 	filter(:permalink => title).first
   end
 
+  def categories_csv
+	categories.collect{ |c| c.name}.join(',') unless id.nil?
+  end
+
+  def tags_csv
+	tags.collect{ |t| t.name}.join(',') unless id.nil?
+  end
+
+  # update the categories and tags with a comma separated list
+  def update_categories_and_tags(cats, tags)
+    remove_all_categories
+    remove_all_tags
+
+	unless cats.empty?
+	  cats.split(',').each do |c|
+		cat= Category.find_or_create(:name => c.strip)
+		add_category(cat)
+	  end
+	end
+	unless tags.empty?
+	  tags.split(',').each do |t|
+		tag= Tag.find_or_create(:name => t.strip)
+		add_tag(tag)
+	  end
+	end
+  end
+  
   private
 
   # find <typo:code lang="ruby"> ... </typo:code> blocks and use syntax to convert the enclosed code to html
