@@ -23,12 +23,12 @@ class Comments < Application
 	end
   end
 
-  def delete
+  def destroy
 	id= params[:commentid]
 	comment= Comment[id]
 	post= comment.post
 	comment.destroy
-    redirect url(:post, post)
+    redirect url(:post, post, :fragment => 'comments')
   end
 
   def index

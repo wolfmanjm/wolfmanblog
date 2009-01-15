@@ -34,9 +34,7 @@ Merb::Router.prepare do
   # Adds the required routes for merb-auth using the password slice
   slice(:merb_auth_slice_password, :name_prefix => nil, :path_prefix => "")
 
-  match("/posts/:id", :method => :delete).to(:controller => "posts", :action => "delete").name(:delete_post)
-
-  match("/comments/:commentid", :method => :delete).to(:controller => "comments", :action => "delete").name(:delete_comment)
+  match("/comments/:commentid", :method => :delete).to(:controller => "comments", :action => "destroy").name(:delete_comment)
   match("/comments/:postid", :method => :post).to(:controller => "comments", :action => "create").name(:add_comment)
   match("/comments(\.:format)").to(:controller => "comments", :action => "index").name(:comments)
 
