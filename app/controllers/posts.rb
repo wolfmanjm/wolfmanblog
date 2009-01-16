@@ -64,6 +64,33 @@ class Posts < Application
     end
   end
 
+  # POST /posts/upload
+  # upload a post, check if it is new or existing and update or create accordingly
+  def upload
+	begin
+	  @h= parse_upload(request.raw_post)
+	rescue
+	  Merb::logger.error("Failed to parse YAML: #{$!}")
+	  raise PreconditionFailed
+	end
+
+	@post= Post.find(:title => @h[:title])
+	if @post.nil?
+	  @post= Post.new
+	  @post.title= @h[:title]
+	end
+
+	@post.body= @h[:body]
+	begin
+	  @post.save
+	  @post.update_categories_and_tags(@h[:categories].join(','), @h[:tags].split(' ').join(','))
+	rescue
+	  Merb::logger.error("Failed to save upload: #{$!} - #{@post.errors.full_messages}")
+	  raise PreconditionFailed
+	end
+    redirect url(:post, @post)
+  end
+
   # GET /posts/:id/edit
   def edit
     only_provides :html
@@ -101,4 +128,29 @@ class Posts < Application
     end
   end
 
+  private
+
+  def parse_upload(data)
+	# read documents, there are two, the first has the params, the second is the actual post
+	params, body = YAML.load_stream(data).documents
+
+	puts "params: #{params.inspect}"
+	puts "body: #{body.inspect}"
+	
+	if params.nil? || params.empty? || body.nil? || body.empty?
+	  raise "input format is bad"
+	end
+
+	if !params.has_key?('title')
+	  raise "Must have a title"
+	end
+
+	if !params.has_key?('categories')
+	  raise "Must have categories"
+	end
+
+	{ :title => params['title'], :categories => params['categories'],
+	  :tags => params['keywords'], :body => body}
+
+  end
 end
