@@ -1,7 +1,7 @@
 class Posts < Application
   # provides :xml, :yaml, :js
 
-  before :ensure_authenticated, :exclude => [:index, :show, :comment, :list_by_category, :list_by_tag, :show_by_old_permalink]
+  before :ensure_authenticated, :exclude => [:index, :show, :list_by_category, :list_by_tag, :show_by_old_permalink]
   
   # GET /posts
   def index
