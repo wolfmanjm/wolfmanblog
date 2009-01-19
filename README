@@ -4,3 +4,6 @@ Written in Merb as a way to learn Merb, and compare and contrast to Rails.
 
 Uses HAML as the rendering engine and Sequel as the ORM.
 
+I haven't written the tests yet (bad boy!). I love RSpec, so I'll do
+the tests when I have some spare time, but I wanted to get this blog
+up a running and serving my blog ASAP.
