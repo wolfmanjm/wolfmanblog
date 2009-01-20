@@ -11,7 +11,7 @@
       %title= @post.title
       %description~ h @post.to_html
       %author Jim Morris
-      %pubDate= @post.created_at.rfc822
+      %pubDate= @post.updated_at.rfc822
       %link= absolute_url(:post, @post)
       %guid{:isPermaLink => 'false'}= "urn:uuid:#{@post.guid}"
     - @post.comments.each do |c|
