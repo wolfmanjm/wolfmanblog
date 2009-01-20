@@ -195,7 +195,9 @@ EOS
 
 	def sb_ads2
 	  str= <<EOS
-	  <iframe src="http://rcm.amazon.com/e/cm?t=blogwolfmanco-20&o=1&p=20&l=ur1&category=holidaytoylist&banner=19PHGN8TBRN9ZMXX9F02&f=ifr" width="120" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+      <iframe src="http://rcm.amazon.com/e/cm?t=blogwolfmanco-20&o=1&p=21&l=ur1&category=computers_accesories&banner=08QR8Z1NWA9KNW3YDW82&f=ifr" width="125" height="125" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+      <iframe src="http://rcm.amazon.com/e/cm?t=blogwolfmanco-20&o=1&p=20&l=ur1&category=software&banner=0ZZ80JGFSVK16HQFJMG2&f=ifr" width="120" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+      <iframe src="http://rcm.amazon.com/e/cm?t=blogwolfmanco-20&o=1&p=20&l=ur1&category=electronics&banner=1VDPFXG4JXWABYY6R8R2&f=ifr" width="120" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
 EOS
 	  {:title => "Ads", :body => str}
 	end

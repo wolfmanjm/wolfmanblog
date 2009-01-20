@@ -60,6 +60,7 @@ class Posts < Application
 	  @post.update_categories_and_tags(params[:post][:categories_csv], params[:post][:tags_csv])
       redirect url(:post, @post)
     rescue
+	  @_message= {:error => "Create failed"}
       render :new
     end
   end
@@ -88,7 +89,7 @@ class Posts < Application
 	  Merb::logger.error("Failed to save upload: #{$!} - #{@post.errors.full_messages}")
 	  raise PreconditionFailed
 	end
-    redirect url(:post, @post)
+    redirect url(:post, @post), :message => {:notice => 'Upload OK'}
   end
 
   # GET /posts/:id/edit
@@ -122,7 +123,7 @@ class Posts < Application
 	  @post.remove_all_tags
 	  @post.remove_all_categories
       @post.destroy
-      redirect url(:posts, :message => {:notice =>"Post deleted"})
+      redirect url(:posts), :message => {:notice => "Post deleted"}
 	rescue
       raise NotFound
     end

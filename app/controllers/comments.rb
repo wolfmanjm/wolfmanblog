@@ -19,7 +19,7 @@ class Comments < Application
 	  redirect url(:post, @post, {:fragment => 'comments'})
 	rescue
 	  #err= @comment.errors.full_messages
-	  redirect url(:post, @post, {:fragment => 'respond', :message => {:notice =>"try again"}})
+	  redirect(url(:post, @post), :message => {:error => "Failed to post comment"})
 	end
   end
 
@@ -28,7 +28,7 @@ class Comments < Application
 	comment= Comment[id]
 	post= comment.post
 	comment.destroy
-    redirect url(:post, post, :fragment => 'comments')
+    redirect(url(:post, post, :fragment => 'comments'), :message => {:notice => 'comment deleted'})
   end
 
   def index

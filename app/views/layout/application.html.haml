@@ -17,6 +17,8 @@
         %h2 A programmers Blog about Ruby, Rails and a few other issues
       #main-wrapper
         #main-content
+          &= message[:notice]
+          &= message[:error]
           = catch_content :for_layout
         #sidebar
           = partial "layout/sidebar", :with => sidebars, :as => :sidebar
