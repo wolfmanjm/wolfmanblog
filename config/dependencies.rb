@@ -16,6 +16,7 @@ dependency "merb-param-protection", merb_gems_version
 dependency "merb-exceptions", merb_gems_version
 dependency "merb-more", merb_gems_version
 dependency 'merb_sequel'
+dependency "merb-parts"
 #
 dependency "BlueCloth", :require_as => "bluecloth"
 dependency "merb-pagination"

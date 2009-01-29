@@ -21,7 +21,7 @@
           &= message[:error]
           = catch_content :for_layout
         #sidebar
-          = partial "layout/sidebar", :with => sidebars, :as => :sidebar
+          = part SidebarPart => :index
       #footer
         %p
           =link_to "Brighthouse", "http://www.height1percent.com/pages/brighthouse/"

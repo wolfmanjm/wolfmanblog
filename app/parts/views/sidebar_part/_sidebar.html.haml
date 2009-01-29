@@ -1,0 +1,5 @@
+%h3.sidebar-title= sidebar[:title]
+-if sidebar[:type] == :partial
+  .static-body= partial sidebar[:name]
+-else
+  .static-body= sidebar[:body]
