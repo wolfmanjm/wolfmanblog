@@ -1,4 +1,0 @@
-%div
-  %ul
-    - for comment in @comments
-      %li= link_to(h("by #{h(comment.name)} on #{comment.post.title}"), url(:post, comment.post, :fragment => "comment-#{comment.id}"))

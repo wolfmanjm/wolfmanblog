@@ -1,0 +1,5 @@
+%h3.sidebar-title Syndicate via RSS
+.static-body
+  %ul{ :id => "syndicate" }
+    %li= link_to('Articles', url(:posts, :format => 'rss'))
+    %li= link_to('Comments', url(:comments, :format => 'rss'))

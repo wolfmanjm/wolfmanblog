@@ -21,7 +21,15 @@
           &= message[:error]
           = catch_content :for_layout
         #sidebar
-          = part SidebarPart => :index
+          = sidebar :google_search
+          = sidebar :contact
+          = sidebar :links
+          = sidebar :syndicate
+          = sidebar :categories
+          = sidebar :tags
+          = sidebar :recent_comments
+          = sidebar :index_of_posts
+          = sidebar :ads
       #footer
         %p
           =link_to "Brighthouse", "http://www.height1percent.com/pages/brighthouse/"
