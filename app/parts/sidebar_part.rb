@@ -1,5 +1,8 @@
 class SidebarPart < Merb::PartController
 
+  #
+  # To add a new sidebar component, add an action here and the view in views/sidebar_part and add it to the global layout
+  #
   def index
     # define sidebars in the display order
     @sidebars=  [sb_google_search, sb_contact, sb_links, sb_syndicate, sb_categories, sb_tags, sb_recent_comments, sb_index, sb_ads]
