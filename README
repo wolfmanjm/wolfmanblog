@@ -7,3 +7,17 @@ Uses HAML as the rendering engine and Sequel as the ORM.
 I haven't written the tests yet (bad boy!). I love RSpec, so I'll do
 the tests when I have some spare time, but I wanted to get this blog
 up a running and serving my blog ASAP.
+
+The sidebar components (ads, tags, categories etc) use parts, where
+each sidebar component is an action in the parts controller, and has a
+view for each sidebar component, then the sidebar components (ie
+parts) are listed in ther order they should appear in the global
+layout.
+
+It has RSS feeds for comments and articles.
+
+Has a simple admin mode which allows the admin to delete posts or
+comments, and to upload new articles.
+
+Has a ridiculously simple scheme for stopping spambots, which actually
+seems to work very well.
