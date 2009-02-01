@@ -9,9 +9,9 @@ class CommentMigration < Sequel::Migration
       primary_key :id
       text :name
       text :body, :null => false
-	  text :email
-	  text :url
-	  text :guid
+      text :email
+      text :url
+      text :guid
       foreign_key :post_id, :posts, :null => false
       timestamp :created_at, :null => false
       timestamp :updated_at, :null => false

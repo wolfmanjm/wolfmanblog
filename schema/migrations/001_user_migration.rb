@@ -10,7 +10,7 @@ class UserMigration < Sequel::Migration
       text :name
       text :crypted_password
       text :salt
-	  boolean :admin
+      boolean :admin
     end
   end
 
