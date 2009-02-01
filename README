@@ -21,3 +21,15 @@ comments, and to upload new articles.
 
 Has a ridiculously simple scheme for stopping spambots, which actually
 seems to work very well.
+
+To run the cucumber based features you need to...
+
+> gem sources -a http://gems.github.com  
+> sudo gem install cucumber      
+> sudo gem install webrat   
+> sudo gem install jsmestad-merb_cucumber
+
+I didn't add these to the dependencies (for bundling) as they are not required for production.
+
+So I'll add integration tests now I have cucumber installed and the authentication feature it 
+installed worked.

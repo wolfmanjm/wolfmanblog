@@ -134,8 +134,8 @@ class Posts < Application
     # read documents, there are two, the first has the params, the second is the actual post
     params, body = YAML.load_stream(data).documents
 
-    puts "params: #{params.inspect}"
-    puts "body: #{body.inspect}"
+#    puts "params: #{params.inspect}"
+#    puts "body: #{body.inspect}"
 	
     if params.nil? || params.empty? || body.nil? || body.empty?
       raise "input format is bad"
