@@ -2,6 +2,6 @@ class Category < Sequel::Model
   many_to_many :posts
 
   def count
-	posts.size
+    posts.size
   end
 end

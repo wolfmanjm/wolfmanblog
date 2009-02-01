@@ -11,7 +11,7 @@ class Exceptions < Merb::Controller
   end
 
   def not_human
-	render :format => :html
+    render :format => :html
   end
 
 end
