@@ -1,7 +1,7 @@
 Feature: Login
   To ensure the safety of the application
-  A regular user of the system
-  Must authenticate before using the app
+  An admin user
+  Must authenticate before doing any admin functions
  
   Scenario Outline: Failed Login
     Given I am not authenticated

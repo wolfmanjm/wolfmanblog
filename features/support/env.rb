@@ -19,7 +19,8 @@ require "merb_cucumber/world/webrat"
 def Spec.run? ; true; end
 
 Merb.start_environment(:testing => true, :adapter => 'runner', :environment => ENV['MERB_ENV'] || 'test')
-  
+
+# runs before each Scenario (I'd prfer a way to run once before all tests
 Before do
   # crude way of getting the Database we are connected to
   # use @db to access sequel in all steps that need to
