@@ -17,6 +17,8 @@
         %h2 A programmers Blog about Programming solutions and a few other issues
       #main-wrapper
         #main-content
+          -if session.authenticated?
+            %p.logged-in== Logged in as #{User[session.user].name}
           &= message[:notice]
           &= message[:error]
           = catch_content :for_layout

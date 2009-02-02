@@ -13,6 +13,7 @@
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>
+                <root id="test.features.dir" name="Features"/>
             </test-roots>
         </data>
     </configuration>

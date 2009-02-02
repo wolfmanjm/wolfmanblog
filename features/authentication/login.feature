@@ -17,3 +17,11 @@ Feature: Login
       | not_an_address | nil            |
       | not@not        | 123455         |
       | 123@abc.com    | wrong_paasword |
+
+
+  Scenario: Successfull Login
+    Given I am not authenticated
+    And a valid user account exists
+    When I login
+    Then the login request should succeed
+    And I should see logged in message
