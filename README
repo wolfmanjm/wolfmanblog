@@ -1,12 +1,10 @@
-This is a very basic Blogging engine, specifically written to host blog.wolfman.com.
+This is a very basic Blogging engine, specifically written to host
+blog.wolfman.com.
 
-Written in Merb as a way to learn Merb, and compare and contrast to Rails.
+Written in Merb as a way to learn Merb, and compare and contrast to
+Rails.
 
 Uses HAML as the rendering engine and Sequel as the ORM.
-
-I haven't written the tests yet (bad boy!). I love RSpec, so I'll do
-the tests when I have some spare time, but I wanted to get this blog
-up a running and serving my blog ASAP.
 
 The sidebar components (ads, tags, categories etc) use parts, where
 each sidebar component is an action in the parts controller, and has a
@@ -29,7 +27,21 @@ To run the cucumber based features you need to...
 > sudo gem install webrat   
 > sudo gem install jsmestad-merb_cucumber
 
-I didn't add these to the dependencies (for bundling) as they are not required for production.
+I didn't add these to the dependencies (for bundling) as they are not
+required for production.
 
-So I'll add integration tests now I have cucumber installed and the authentication feature it 
-installed worked.
+A note on my feature testing...
+
+I use a hybrid paradigm of fixtures and factories for seeding the
+database. Basically I load the data directly into the database using
+some Sequel helpers (see db_helpers). The idea is that data is loaded
+as needed by Givens in each Scenario, which calls the relevant
+db_helper to load the data needed for that Scenario.  This means that
+all data is not loaded every time, it is faster than a factory because
+it loads directly into the database bypassing the Models, it keeps the
+data close to the tests so it is easier to maintain.  It maybe slower
+than fixtures as data is not loaded once at the start as it can be
+with fixturesm but faster if the fixtures are reloaded every Scenario.
+
+At least that is the theory. YMMV
+
