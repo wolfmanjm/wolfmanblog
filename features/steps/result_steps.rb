@@ -17,3 +17,7 @@ end
 Then /^the (.*) ?request should succeed/ do |_|
   @response.should be_successful
 end
+
+Then /^the (.*) ?request should return status (\d+)/ do |_, status|
+  @response.status.should == status.to_i
+end

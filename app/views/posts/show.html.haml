@@ -16,7 +16,7 @@
 
 -if session.authenticated?
   = link_to 'Edit', url(:edit_post,  @post)
-  = delete_button @post, 'Delete', :class => 'delete'
+  = delete_button @post, 'Delete post', :class => 'delete'
 
 -if @post.allow_comments or @post.comments.size > 0
   %a{ :name => "comments" }
