@@ -4,7 +4,7 @@ Given /^I am not authenticated$/ do
 end
 
 Given /^a valid user account exists$/ do
-  Given 'The database table users is truncated'
+  @dbhelper.truncate(:users)
   # do this instead of using fixtures
   # eventually we can do this
 #  Given 'The database contains:', table(%{
@@ -14,7 +14,7 @@ Given /^a valid user account exists$/ do
 #    | users | salt             | 46ca4885db7cd09121ef4d9c7ba2af13de40ff9e |
 #  })
   # but for now we have to do it the hard way
-  Given "user testname with 12f0d0cf9d59500b89677e3f9f037aaa993979dc and 46ca4885db7cd09121ef4d9c7ba2af13de40ff9e"
+  @dbhelper.add_user('testname', '12f0d0cf9d59500b89677e3f9f037aaa993979dc', '46ca4885db7cd09121ef4d9c7ba2af13de40ff9e')
 end
 
 When 'I login' do

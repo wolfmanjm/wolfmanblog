@@ -2,8 +2,11 @@ audit\:actions=Print out controllers and their actions (use CONTROLLER=Foo,Bar t
 audit\:controllers=Print out all controllers
 audit\:routes=Print out the named and anonymous routes
 default=Default: run spec examples
+feature[feature_name]=Run a specified feature with Cucumber.  feature[feature_name]
+features=Run Features with Cucumber
 haml\:compile_sass=Compiles all sass files into CSS
 merb-auth_more\:default=Do something for merb-auth-more
+merb_cucumber\:test_env=
 merb_env=Start runner environment
 sequel\:db\:migrate=Perform migration using migrations in schema/migrations
 sequel\:merb_start=
