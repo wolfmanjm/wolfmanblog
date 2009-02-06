@@ -24,5 +24,3 @@ Feature: Index
     And I should see post 8
     And I should not see post 1
 
-  Scenario: GET / has sidebar
-
