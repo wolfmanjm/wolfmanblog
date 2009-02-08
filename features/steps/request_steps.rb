@@ -1,4 +1,4 @@
-When /^I (POST|DELETE|PUT) (.*) id (\d+)$/ do |method, uri, id|
+When /^I (DELETE|PUT) (.*) id (\d+)$/ do |method, uri, id|
   @response= request(uri + "/#{id}", :method => method)
 end
 

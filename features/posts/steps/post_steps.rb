@@ -21,3 +21,21 @@ Then /^I should see only post (\d+)$/ do |n|
   @response.should have_selector("form.commentform")
 end
 
+When /^I leave an? (in)?valid comment$/ do |t|
+  When 'I fill in "comment[name]" with "comment-user"'
+  And 'I fill in "comment[body]" with "my comment message"'
+  And 'I fill in "test" with ' + (t.nil? ? '"no"' : '"blahblahblah"')
+  And 'I press "Submit"'
+end
+
+Then /^I should (not)? ?see the comment$/ do |t|
+  comment_user= "ol.comment-list li.comment cite strong:contains('comment-user')"
+  comment_body= "ol.comment-list li.comment:contains('my comment message')"
+  if t.nil?
+    @response.should have_selector(comment_user)
+    @response.should have_selector(comment_body)
+  else
+    @response.should_not have_selector(comment_user)
+    @response.should_not have_selector(comment_body)
+  end
+end

@@ -21,3 +21,7 @@ end
 Then /^the (.*) ?request should return status (\d+)/ do |_, status|
   @response.status.should == status.to_i
 end
+
+Then /^the (.*) ?request should redirect to (.*)$/ do |_, uri|
+  @response.should redirect_to(uri)
+end

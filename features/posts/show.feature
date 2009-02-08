@@ -1,7 +1,7 @@
 Feature: Show
   To allow users to read specific articles
   A user selecting a specific article
-  Should see only that article
+  Should see only that article and comment form
 
   Scenario: Click the title to show
     Given 2 posts exist
