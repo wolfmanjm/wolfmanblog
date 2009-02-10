@@ -1,6 +1,6 @@
 - for post in @posts
   .post
-    %h2= link_to post.title, url(:post, post)
+    %h2= link_to post.title, url(:article, post.year, post.month, post.day, post.permalink)
     %p.auth
       Posted by Jim Morris
       %span.typo_date= "on " + post.created_at.to_s

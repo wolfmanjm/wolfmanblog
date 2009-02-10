@@ -54,7 +54,19 @@ class Post < Sequel::Model
       end
     end
   end
-  
+
+  def year
+    created_at.year
+  end
+
+  def month
+    created_at.month
+  end
+
+  def day
+    created_at.day
+  end
+
   private
 
   # find <typo:code lang="ruby"> ... </typo:code> blocks and use syntax to convert the enclosed code to html
