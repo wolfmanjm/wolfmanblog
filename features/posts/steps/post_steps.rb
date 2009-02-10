@@ -2,12 +2,15 @@
 Given /^(\d+) posts exist$/ do |n|
   @dbhelper.truncate(:posts)
   for i in (1..n.to_i) do
-    @dbhelper.add_post(:id => i, :title => "post #{i}", :body => "body of post #{i}")
+    @dbhelper.add_post(:id => i, :title => "post #{i}", :body => "body of post #{i}", :permalink => "post-#{i}")
   end
 end
 
 Then /^I should see post (\d+)$/ do |n|
-  @response.should have_xpath("//h2/a[@href='/posts/#{n}']['post #{n}']")
+  y= Time.now.year
+  m= Time.now.month
+  d= Time.now.day
+  @response.should have_xpath("//h2/a[@href='/articles/#{y}/#{m}/#{d}/post-#{n}']['post #{n}']")
   @response.should have_selector("p:contains('body of post #{n}')")
 end
 

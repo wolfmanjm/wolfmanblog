@@ -37,7 +37,7 @@ class DBHelper
   end
 
   def add_post(h)
-    @db[:posts].insert(h.merge(:created_at => Time.now.iso8601, :updated_at => Time.now.iso8601))
+    @db[:posts].insert(h.merge(:created_at => Time.now.iso8601, :updated_at => Time.now.iso8601, :guid => "guid:#{rand(1000000)}"))
   end
 
   def add_comment(postid, comment, by)
