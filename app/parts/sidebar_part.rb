@@ -53,6 +53,11 @@ class SidebarPart < Merb::PartController
     render
   end
 
+  def recent_posts
+    @index_of_posts= Post.reverse_order(:updated_at)
+    render
+  end
+
   def ads
     render
   end

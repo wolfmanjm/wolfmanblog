@@ -15,7 +15,7 @@ Then /^I should see post (\d+)$/ do |n|
 end
 
 Then /^I should not see post (\d+)$/ do |n|
-  @response.should_not have_xpath("//h2/a[@href='/posts/#{n}']")
+  @response.should_not have_selector("p:contains('body of post #{n}')")
 end
 
 Then /^I should see only post (\d+)$/ do |n|

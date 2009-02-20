@@ -299,12 +299,6 @@ font-size: 14px;
 line-height: 14px;
 }
 
-.sidebar-node h3 {
-padding: 1px 0 0 0;
-margin: 5px 0;
-font-size: 14px;
-color: #ff0099;
-}
 
 /* post headings
 ----------------------------------------------- */
@@ -413,6 +407,12 @@ padding-left: 18px;
 
 /* sidebar
 ----------------------------------------------- */
+.sidebar-node h3 {
+padding: 1px 0 0 0;
+margin: 5px 0;
+font-size: 14px;
+color: #ff0099;
+}
 
 .sidebar-node ul {
 margin: 0;
@@ -423,17 +423,17 @@ font-family: verdana, sans-serif;
 }
 
 .sidebar-node li {
-background: url(/images/theme/bullet_blue.png) 0 0 no-repeat;
+background: url(/images/bullet_blue.png) 0 0 no-repeat;
 padding: 0 0 4px 18px;
 line-height: 12px;
 }
 
 .sidebar-node .resources li {
-background: url(/images/theme/disk_multiple.png) 0 0 no-repeat;
+background: url(/images/disk_multiple.png) 0 0 no-repeat;
 }
 
 .sidebar-node .feeds li {
-background: url(/images/theme/feed.png) 0 0 no-repeat;
+background: url(/images/feed.png) 0 0 no-repeat;
 }
 
 .sidebar-node li em {
