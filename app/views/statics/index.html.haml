@@ -1,0 +1,19 @@
+%h1 Static Sidebar Elements
+
+%table{:border => 1 }
+  %tr
+    %th Id
+    %th Title
+    %th Position
+    %th Body
+
+  - for s in @statics
+    %tr
+      %td= link_to s.id, url(:static, s)
+      %td= s.title
+      %td= s.position
+      %td= h s.body
+      %td= link_to 'Edit', url(:edit_static,  s)
+      %td= delete_button s, 'Delete', :class => 'delete'
+%br/
+%p= link_to 'New', url(:new_static)

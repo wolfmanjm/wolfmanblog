@@ -1,0 +1,28 @@
+%h1 Show Static
+
+%p= error_messages_for @static
+
+%p
+  title:
+  = @static.title
+%p
+  position:
+  =@static.position
+    
+%p
+  body:
+  %br/
+  =h @static.body
+
+%hr/
+%p
+  :plain
+  = @static.body
+
+%hr/
+
+= link_to 'Edit', url(:edit_static, @static)
+|
+= delete_button @static, 'Delete', :class => 'delete'
+|
+= link_to 'Index', url(:statics)

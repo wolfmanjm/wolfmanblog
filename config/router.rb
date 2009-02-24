@@ -30,6 +30,7 @@ Merb::Router.prepare do
   # RESTful routes
 
   resources :posts
+  resources :statics
 
   match("/posts/upload", :method => :post).to(:controller => "posts", :action => "upload").name(:upload_post)
 

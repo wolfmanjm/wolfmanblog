@@ -62,4 +62,8 @@ class SidebarPart < Merb::PartController
     render
   end
 
+  def statics
+    @statics= Static.order(:position).all
+    render
+  end
 end

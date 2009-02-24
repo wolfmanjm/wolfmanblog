@@ -1,0 +1,9 @@
+%h1 Create new Static
+
+%p= error_messages_for @static
+
+= form_for(@static, :action => url(:statics) ) do
+  = partial :form
+  %p= submit "Create"
+ 
+= link_to 'Back', url(:statics)

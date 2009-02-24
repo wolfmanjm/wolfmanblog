@@ -1,0 +1,5 @@
+.sidebar-node
+  - for s in @statics
+    %h3= s.title
+    :plain
+      #{s.body}
