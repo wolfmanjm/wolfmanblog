@@ -25,3 +25,4 @@ alt/*
 Capfile
 config/deploy.rb
 wolfmanblog.conf
+public/cache/*
