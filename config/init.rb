@@ -30,6 +30,10 @@ end
 
 Merb::BootLoader.after_app_loads do
   # This will get executed after your app's classes have been loaded.
+  Merb::Cache.setup do
+    register(:page_store, Merb::Cache::PageStore[Merb::Cache::FileStore], :dir => Merb.root / "public/cache")
+    register(:default, Merb::Cache::AdhocStore[:page_store])
+  end
 end
 
 #$DEBUG= true
