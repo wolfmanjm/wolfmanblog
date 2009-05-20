@@ -21,9 +21,9 @@
       = link_to 'Edit', url(:edit_post,  post)
       = delete_button post, 'Delete post', :class => 'delete'
 
-%p#pagination
-  Older posts:
-  = paginate(@posts.current_page, @posts.page_count, :inner_window => 5)
+%p
+  #pagination Older posts:
+  = will_paginate @posts
 
 -if session.authenticated?
   = link_to 'New', url(:new_post)

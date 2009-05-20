@@ -34,6 +34,19 @@ Merb::BootLoader.after_app_loads do
     register(:page_store, Merb::Cache::PageStore[Merb::Cache::FileStore], :dir => Merb.root / "public/cache")
     register(:default, Merb::Cache::AdhocStore[:page_store])
   end
+  
+  require 'will_paginate/view_helpers/link_renderer'
+
+  # patch to use special page
+  WillPaginate::ViewHelpers::LinkRenderer.class_eval do
+    protected
+
+    def url(page)
+      params = @template.request.params.except(:action, :controller).merge(:p => 'page', 'page' => page)
+      @template.url(:this, params)
+    end
+  end
+  
 end
 
 #$DEBUG= true

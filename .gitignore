@@ -26,3 +26,4 @@ Capfile
 config/deploy.rb
 wolfmanblog.conf
 public/cache/*
+public/files

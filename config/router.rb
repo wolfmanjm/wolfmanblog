@@ -27,10 +27,14 @@
 
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do
-  # RESTful routes
+ 
+  # make pagination a url for caching, p must be 'page'
+  match("/posts(/:p/:page)").to(:controller => 'posts', :action =>'index').name(:posts)
 
+  # RESTful routes
   resources :posts
   resources :statics
+
 
   match("/posts/upload", :method => :post).to(:controller => "posts", :action => "upload").name(:upload_post)
 
@@ -41,12 +45,13 @@ Merb::Router.prepare do
   match("/comments/:postid", :method => :post).to(:controller => "comments", :action => "create").name(:add_comment)
   match("/comments(\.:format)").to(:controller => "comments", :action => "index").name(:comments)
 
+  match("/articles/category/:name(/:p/:page)").to(:controller => "posts", :action => "list_by_category").name(:category)
+  match("/articles/tag/:name(/:p/:page)").to(:controller => "posts", :action => "list_by_tag").name(:tag)
+
   # route old permalinks http://blog.wolfman.com/articles/2008/08/27/porting-xgps-to-qtopia-for-the-freerunner
   match("/articles/:year/:month/:day/:title").to(:controller => "posts", :action => "show_by_old_permalink").name(:article)
-
-  match("/articles/category/:name").to(:controller => "posts", :action => "list_by_category").name(:category)
-  match("/articles/tag/:name").to(:controller => "posts", :action => "list_by_tag").name(:tag)
-
+ 
+ 
   # route old rss feeds
   match("/xml/rss20/comments/feed.xml").to(:controller => "comments", :action => "index", :format => :rss)
   match("/xml/rss20/feed.xml").to(:controller => "posts", :action => "index", :format => :rss)
@@ -59,5 +64,5 @@ Merb::Router.prepare do
   #default_routes
 
   # Change this for your home page to be available at /
-  match('/').to(:controller => 'posts', :action =>'index')
+  match('/(:p/:page)').to(:controller => 'posts', :action =>'index')
 end

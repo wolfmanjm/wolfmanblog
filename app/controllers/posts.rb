@@ -3,18 +3,18 @@ class Posts < Application
 
   before :ensure_authenticated, :exclude => [:index, :show, :list_by_category, :list_by_tag, :show_by_old_permalink]
 
-  cache :index, :show, :show_by_old_permalink
+  cache :index, :show, :show_by_old_permalink, :list_by_category, :list_by_tag
 
   # GET /posts
-  def index
+  def index(page = "1")
     provides :rss
-    page= params[:page] || "1"
+    page ||= "1"
     @posts = Post.reverse_order(:created_at).paginate(page.to_i, 4)
     display @posts
   end
 
-  def list_by_category(name)
-    page= params[:page] || "1"
+  def list_by_category(name, page = "1")
+    page ||= "1"
     c= Category[:name => name]
     raise NotFound unless c
     pids = c.posts.collect{ |i| i.id}
@@ -22,8 +22,8 @@ class Posts < Application
     display @posts, :index
   end
 
-  def list_by_tag(name)
-    page= params[:page] || "1"
+  def list_by_tag(name,page = "1")
+    page ||= "1"
     c= Tag[:name => name]
     raise NotFound unless c
     pids = c.posts.collect{ |i| i.id}
@@ -32,9 +32,9 @@ class Posts < Application
   end
 
   # GET /posts/:id
-  def show
+  def show(id)
     provides :rss
-    @post = Post[params[:id]]
+    @post = Post[id]
     raise NotFound unless @post
     display @post
   end
