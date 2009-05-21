@@ -27,3 +27,4 @@ config/deploy.rb
 wolfmanblog.conf
 public/cache/*
 public/files
+.emacs.desktop

@@ -29,7 +29,7 @@ Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do
  
   # make pagination a url for caching, p must be 'page'
-  match("/posts(/:p/:page)").to(:controller => 'posts', :action =>'index').name(:posts)
+  match("/posts(/:p/:page)", :method => :get).to(:controller => 'posts', :action =>'index').name(:posts)
 
   # RESTful routes
   resources :posts
