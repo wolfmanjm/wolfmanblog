@@ -48,10 +48,11 @@ At least that is the theory. YMMV
 Recent Changes
 --------------
 
-Added page caching, full pages get cached and Apache mod_rewrite fetches
-the cached pages directly.
-
-Use will_paginate instead of merb-paginate.
+* Added page caching, full pages get cached and Apache mod_rewrite fetches
+  the cached pages directly.
+* Uses will_paginate instead of merb-paginate.
+* Made all article/post access via permalink
+* Made access to / redirect to /posts/page/1 to keep the cache from duplicating the index
 
 TODO
 ====
@@ -60,8 +61,7 @@ TODO
    Apache will fetch the cached page before it even gets to Merb.
    Probably need to change the URL when logged in so it doesn't get a cached page
 
-2. Need to flush cache on comments
+2. Need to flush cache on new comments
 
-3. Need to make article access be always by permalink
+3. Right now need to manually flush cache when new posts are added, should make that automatic
 
-4. Be nice if there were not two different cache entries for / and posts
