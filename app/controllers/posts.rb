@@ -34,6 +34,8 @@ class Posts < Application
   # GET /posts/:id
   def show(id)
     provides :rss
+    # this protects against spambots sending in 101#blahblah
+    raise NotFound unless id =~ /^\d+$/
     @post = Post[id]
     raise NotFound unless @post
     display @post

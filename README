@@ -45,8 +45,17 @@ with fixturesm but faster if the fixtures are reloaded every Scenario.
 
 At least that is the theory. YMMV
 
+Recent Changes
+--------------
+
+Added page caching, full pages get cached and Apache mod_rewrite fetches
+the cached pages directly.
+
+Use will_paginate instead of merb-paginate.
 
 TODO
 ====
 
-1. Need to cache pages to speed up site
+1. Need to fix authenticated users, which was broken by adding caching as
+   Apache will fetch the cached page before it even gets to Merb.
+   Probably need to change the URL when logged in so it doesn't get a cached page
