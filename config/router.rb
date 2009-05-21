@@ -31,6 +31,12 @@ Merb::Router.prepare do
   # make pagination a url for caching, p must be 'page'
   match("/posts(/:p/:page)", :page => /^\d+$/, :method => :get).to(:controller => 'posts', :action =>'index')
 
+  # route by post id, redirected to route by permalink in controller
+  match("/posts/:id", :method => :get).to(:controller => 'posts', :action =>'show_by_id').name(:post)
+
+  # route by permalink
+  match("/articles/:year/:month/:day/:title").to(:controller => "posts", :action => "show").name(:article)
+
   # RESTful routes
   resources :posts
   resources :statics
@@ -48,8 +54,6 @@ Merb::Router.prepare do
   match("/articles/category/:name(/:p/:page)").to(:controller => "posts", :action => "list_by_category").name(:category)
   match("/articles/tag/:name(/:p/:page)").to(:controller => "posts", :action => "list_by_tag").name(:tag)
 
-  # route old permalinks http://blog.wolfman.com/articles/2008/08/27/porting-xgps-to-qtopia-for-the-freerunner
-  match("/articles/:year/:month/:day/:title").to(:controller => "posts", :action => "show_by_old_permalink").name(:article)
  
  
   # route old rss feeds
@@ -64,5 +68,8 @@ Merb::Router.prepare do
   #default_routes
 
   # Change this for your home page to be available at /
-  match('/(:p/:page)').to(:controller => 'posts', :action =>'index')
+  match('/').defer_to do
+    redirect "/posts/page/1"
+  end
+  
 end

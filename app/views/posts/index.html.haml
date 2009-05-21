@@ -1,6 +1,6 @@
 - for post in @posts
   .post
-    %h2= link_to post.title, url(:article, post.year, post.month, post.day, post.permalink)
+    %h2= link_to post.title, permalink(post)
     %p.auth
       Posted by Jim Morris
       %span.typo_date= "on " + post.created_at.to_s
@@ -15,7 +15,7 @@
       %strong &nbsp;|&nbsp;
       = num_comments(post)
 
-    = link_to 'Show', url(:post, post)
+    = link_to 'Show', permalink(post)
     -if session.authenticated?
       |
       = link_to 'Edit', url(:edit_post,  post)

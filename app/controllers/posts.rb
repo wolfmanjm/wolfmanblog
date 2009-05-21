@@ -1,10 +1,11 @@
 class Posts < Application
   # provides :xml, :yaml, :js
 
-  before :ensure_authenticated, :exclude => [:index, :show, :list_by_category, :list_by_tag, :show_by_old_permalink]
-
-  cache :index, :show, :show_by_old_permalink, :list_by_category, :list_by_tag
-
+  before :ensure_authenticated, :exclude => [:index, :show, :list_by_category, :list_by_tag, :show_by_id]
+  
+  cache :show, :list_by_category, :list_by_tag
+  cache :index #, :store => :action_store
+  
   # GET /posts
   def index(page = "1")
     provides :rss
@@ -22,7 +23,7 @@ class Posts < Application
     display @posts, :index
   end
 
-  def list_by_tag(name,page = "1")
+  def list_by_tag(name, page = "1")
     page ||= "1"
     c= Tag[:name => name]
     raise NotFound unless c
@@ -32,19 +33,20 @@ class Posts < Application
   end
 
   # GET /posts/:id
-  def show(id)
-    provides :rss
+  def show_by_id(id)
     # this protects against spambots sending in 101#blahblah
     raise NotFound unless id =~ /^\d+$/
     @post = Post[id]
     raise NotFound unless @post
-    display @post
+    redirect permalink(@post)
   end
 
-  def show_by_old_permalink(year, month, day, title)
+  # GET /articles/:year/:month/:day/:permalink
+  def show(year, month, day, title)
+    provides :rss
     @post= Post.find_by_permalink(title)
     raise NotFound unless @post
-    display @post, :show
+    display @post
   end
 
   # GET /posts/new

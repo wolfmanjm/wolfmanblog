@@ -59,3 +59,9 @@ TODO
 1. Need to fix authenticated users, which was broken by adding caching as
    Apache will fetch the cached page before it even gets to Merb.
    Probably need to change the URL when logged in so it doesn't get a cached page
+
+2. Need to flush cache on comments
+
+3. Need to make article access be always by permalink
+
+4. Be nice if there were not two different cache entries for / and posts

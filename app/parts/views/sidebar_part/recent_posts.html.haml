@@ -4,5 +4,5 @@
     %ul
       - for post in @index_of_posts
         %li
-          = link_to(post.title, url(:post, post))
+          = link_to(post.title, permalink(post))
           %br/

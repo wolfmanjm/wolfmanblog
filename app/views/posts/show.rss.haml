@@ -2,7 +2,7 @@
 %rss{:version => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/"}
   %channel
     %title= "Wolfmans Howlings: #{@post.title}"
-    %link= absolute_url(:post, @post)
+    %link= absolute_permalink(@post)
     %description A programmers Blog about Ruby, Rails and a few other issue
     %language en-us
     %ttl 40
@@ -12,7 +12,7 @@
       %description~ h @post.to_html
       %author Jim Morris
       %pubDate= @post.updated_at.rfc822
-      %link= absolute_url(:post, @post)
+      %link= absolute_permalink(@post)
       %guid{:isPermaLink => 'false'}= "urn:uuid:#{@post.guid}"
     - @post.comments.each do |c|
       %item
