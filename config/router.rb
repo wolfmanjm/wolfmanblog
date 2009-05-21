@@ -31,13 +31,16 @@ Merb::Router.prepare do
   # make pagination a url for caching, p must be 'page'
   match("/posts(/:p/:page)", :page => /^\d+$/, :method => :get).to(:controller => 'posts', :action =>'index')
 
+  # becuase next one would overide this
+  match("/posts/new", :method => :get).to(:controller => 'posts', :action =>'new')
+
   # route by post id, redirected to route by permalink in controller
   match("/posts/:id", :method => :get).to(:controller => 'posts', :action =>'show_by_id').name(:post)
 
   # route by permalink
   match("/articles/:year/:month/:day/:title").to(:controller => "posts", :action => "show").name(:article)
 
-  # RESTful routes
+  # RESTful routes, NOTE some of the post resources are overridden above
   resources :posts
   resources :statics
 
