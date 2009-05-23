@@ -49,12 +49,12 @@ class SidebarPart < Merb::PartController
   end
 
   def index_of_posts
-    @index_of_posts= Post.order(:title)
+    @index_of_posts= Post.order(:title).all
     render
   end
 
   def recent_posts
-    @index_of_posts= Post.reverse_order(:updated_at)
+    @index_of_posts= Post.reverse_order(:updated_at).all
     render
   end
 

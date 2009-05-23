@@ -11,7 +11,7 @@ class Tag < Sequel::Model
       GROUP BY tags.id, tags.name
       ORDER BY article_counter DESC
       LIMIT #{limit} }
-    )
+    ).all
   end
 
 end
