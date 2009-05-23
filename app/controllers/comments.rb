@@ -1,7 +1,7 @@
 class Comments < Application
 
   before :ensure_authenticated, :exclude => [:index, :create]
-
+ 
   # POST /comments adds a comment to the given post
   def create
     unless params[:test] =~ /^no$/i
@@ -15,10 +15,11 @@ class Comments < Application
     @comment = Comment.new(params[:comment])
     begin
       @post.add_comment(@comment)
-      redirect url(:post, @post, {:fragment => 'comments'})
+      flush_cache
+      redirect permalink(@post, {:fragment => 'comments'})
     rescue
       # #err= @comment.errors.full_messages
-      redirect(url(:post, @post), :message => {:error => "Failed to post comment"})
+      redirect(permalink(@post), :message => {:error => "Failed to post comment"})
     end
   end
 
@@ -27,7 +28,8 @@ class Comments < Application
     comment= Comment[id]
     post= comment.post
     comment.destroy
-    redirect(url(:post, post, :fragment => 'comments'), :message => {:notice => 'comment deleted'})
+    flush_cache
+    redirect(permalink(post, :fragment => 'comments'), :message => {:notice => 'comment deleted'})
   end
 
   def index
@@ -36,4 +38,10 @@ class Comments < Application
     display @comments
   end
 
+  private
+  
+  def flush_cache
+    # TODO try to flush just the affected article
+    Merb::Cache[:page_store].delete_all!
+  end
 end

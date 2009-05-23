@@ -2,6 +2,7 @@ class Posts < Application
   # provides :xml, :yaml, :js
 
   before :ensure_authenticated, :exclude => [:index, :show, :list_by_category, :list_by_tag, :show_by_id]
+  after :flush_cache, :only => [:create, :upload, :destroy]
   
   cache :show, :list_by_category, :list_by_tag
   cache :index #, :store => :action_store
@@ -64,7 +65,7 @@ class Posts < Application
     begin
       @post.save
       @post.update_categories_and_tags(params[:post][:categories_csv], params[:post][:tags_csv])
-      redirect url(:post, @post)
+      redirect permalink(@post)
     rescue
       @_message= {:error => "Create failed"}
       render :new
@@ -158,5 +159,10 @@ class Posts < Application
     { :title => params['title'], :categories => params['categories'],
       :tags => params['keywords'], :body => body}
 
+  end
+
+  # flushes the entire page store cache
+  def flush_cache
+    Merb::Cache[:page_store].delete_all!    
   end
 end

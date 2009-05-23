@@ -5,8 +5,8 @@ module Merb
       part SidebarPart => name
     end
 
-    def permalink(post)
-      url(:article, post.year, post.month, post.day, post.permalink)
+    def permalink(post, opts={})
+      url(:article, post.year, post.month, post.day, post.permalink, opts)
     end
 
     def absolute_permalink(post)

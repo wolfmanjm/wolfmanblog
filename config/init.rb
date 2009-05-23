@@ -32,10 +32,19 @@ Merb::BootLoader.after_app_loads do
   # This will get executed after your app's classes have been loaded.
   Merb::Cache.setup do
     register(:page_store, Merb::Cache::PageStore[Merb::Cache::FileStore], :dir => Merb.root / "public/cache")
-    register(:action_store, Merb::Cache::ActionStore[Merb::Cache::FileStore], :dir => Merb.root / "tmp")
+    #register(:action_store, Merb::Cache::ActionStore[Merb::Cache::FileStore], :dir => Merb.root / "tmp")
     register(:default, Merb::Cache::AdhocStore[:page_store]) # , :action_store])
   end
-  
+
+  # add delete_all to Merb::Cache::Filestore
+  Merb::Cache::FileStore.class_eval do
+    def delete_all!
+      #puts "FileStore#delete_all! - rm -rf #{Dir.glob( @dir / '*').inspect}"
+      FileUtils.rm_rf(Dir.glob( @dir / '*'))
+    end
+  end
+
+
   require 'will_paginate/view_helpers/link_renderer'
 
   # patch to use special page
