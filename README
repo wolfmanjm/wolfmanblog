@@ -53,6 +53,8 @@ Recent Changes
 * Uses will_paginate instead of merb-paginate.
 * Made all article/post access via permalink
 * Made access to / redirect to /posts/page/1 to keep the cache from duplicating the index
+* Flush entire page cache on new comments
+* Flush entire page cache on create and update posts
 
 TODO
 ====
@@ -60,8 +62,5 @@ TODO
 1. Need to fix authenticated users, which was broken by adding caching as
    Apache will fetch the cached page before it even gets to Merb.
    Probably need to change the URL when logged in so it doesn't get a cached page
-
-2. Need to flush cache on new comments
-
-3. Right now need to manually flush cache when new posts are added, should make that automatic
+2. Figure out how to flush a specific page cache rather than the whole lot
 
