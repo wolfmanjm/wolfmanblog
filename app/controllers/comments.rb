@@ -42,6 +42,6 @@ class Comments < Application
   
   def flush_cache
     # TODO try to flush just the affected article
-    Merb::Cache[:page_store].delete_all!
+    Merb::Cache[:action_store].delete_all!
   end
 end

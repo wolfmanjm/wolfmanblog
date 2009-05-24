@@ -29,13 +29,15 @@ Merb::BootLoader.before_app_loads do
 end
 
 Merb::BootLoader.after_app_loads do
+
   # This will get executed after your app's classes have been loaded.
   Merb::Cache.setup do
-    register(:page_store, Merb::Cache::PageStore[Merb::Cache::FileStore], :dir => Merb.root / "public/cache")
-    #register(:action_store, Merb::Cache::ActionStore[Merb::Cache::FileStore], :dir => Merb.root / "tmp")
-    register(:default, Merb::Cache::AdhocStore[:page_store]) # , :action_store])
+    register(:page_store, Merb::Cache::PageStore[Merb::Cache::FileStore], :dir => Merb.root / 'public' / 'cache')
+    register(:action_store, Merb::Cache::ActionStore[Merb::Cache::FileStore], :dir => Merb.root / 'tmp')
+    #register(:default, Merb::Cache::AdhocStore.new)
+    register(:default, Merb::Cache::AdhocStore[:action_store])
   end
-
+  
   # add delete_all to Merb::Cache::Filestore
   Merb::Cache::FileStore.class_eval do
     def delete_all!

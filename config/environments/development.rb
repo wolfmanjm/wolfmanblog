@@ -13,3 +13,8 @@ Merb::Config.use { |c|
   # Or redirect logging into a file:
   # c[:log_file]  = Merb.root / "log" / "development.log"
 }
+
+Merb::BootLoader.after_app_loads do
+  
+end
+

@@ -55,12 +55,13 @@ Recent Changes
 * Made access to / redirect to /posts/page/1 to keep the cache from duplicating the index
 * Flush entire page cache on new comments
 * Flush entire page cache on create and update posts
+* Switched to action store cache instead, still delete as above
+* using action store do not use cache if authenticated so admin oages are not cached
 
 TODO
 ====
 
-1. Need to fix authenticated users, which was broken by adding caching as
-   Apache will fetch the cached page before it even gets to Merb.
-   Probably need to change the URL when logged in so it doesn't get a cached page
-2. Figure out how to flush a specific page cache rather than the whole lot
+1. Figure out how to flush a specific page cache rather than the whole lot
+2. purge empty categories and tags
+3. have different messages in different colors (error, note, warning)
 

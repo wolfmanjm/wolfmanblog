@@ -4,8 +4,7 @@ class Posts < Application
   before :ensure_authenticated, :exclude => [:index, :show, :list_by_category, :list_by_tag, :show_by_id]
   after :flush_cache, :only => [:create, :upload, :destroy]
   
-  cache :show, :list_by_category, :list_by_tag
-  cache :index #, :store => :action_store
+  cache [:index, :show, :list_by_category, :list_by_tag], { :unless => :authenticated }
   
   # GET /posts
   def index(page = "1")
@@ -163,6 +162,10 @@ class Posts < Application
 
   # flushes the entire page store cache
   def flush_cache
-    Merb::Cache[:page_store].delete_all!    
+    Merb::Cache[:action_store].delete_all!    
+  end
+
+  def authenticated
+    session.authenticated?
   end
 end
