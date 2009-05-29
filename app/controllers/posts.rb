@@ -4,7 +4,7 @@ class Posts < Application
   before :ensure_authenticated, :exclude => [:index, :show, :list_by_category, :list_by_tag, :show_by_id]
   after :flush_cache, :only => [:create, :upload, :destroy]
   
-  cache [:index, :show, :list_by_category, :list_by_tag], { :unless => :authenticated }
+  cache [:index, :show, :list_by_category, :list_by_tag], { :unless => :authenticated_or_rss }
   
   # GET /posts
   def index(page = "1")
@@ -34,11 +34,18 @@ class Posts < Application
 
   # GET /posts/:id
   def show_by_id(id)
+    provides :rss
     # this protects against spambots sending in 101#blahblah
     raise NotFound unless id =~ /^\d+$/
     @post = Post[id]
     raise NotFound unless @post
-    redirect permalink(@post)
+    if content_type == :rss
+      opts= { :format => :rss }
+    else
+      opts= { }
+    end
+    
+    redirect permalink(@post, opts)
   end
 
   # GET /articles/:year/:month/:day/:permalink
@@ -165,7 +172,7 @@ class Posts < Application
     Merb::Cache[:action_store].delete_all!    
   end
 
-  def authenticated
-    session.authenticated?
+  def authenticated_or_rss
+    session.authenticated? || params['format'] == 'rss'
   end
 end
