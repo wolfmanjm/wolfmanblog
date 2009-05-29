@@ -34,8 +34,8 @@ Merb::BootLoader.after_app_loads do
   Merb::Cache.setup do
     register(:page_store, Merb::Cache::PageStore[Merb::Cache::FileStore], :dir => Merb.root / 'public' / 'cache')
     register(:action_store, Merb::Cache::ActionStore[Merb::Cache::FileStore], :dir => Merb.root / 'tmp' / 'cache')
-    #register(:default, Merb::Cache::AdhocStore.new)
-    register(:default, Merb::Cache::AdhocStore[:action_store])
+    register(:default, Merb::Cache::AdhocStore.new)
+    #register(:default, Merb::Cache::AdhocStore[:action_store])
   end
   
   # add delete_all to Merb::Cache::Filestore

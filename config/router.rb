@@ -38,7 +38,7 @@ Merb::Router.prepare do
   match("/posts/:id(\.:format)", :method => :get).to(:controller => 'posts', :action =>'show_by_id').name(:post)
 
   # route by permalink
-  match("/articles/:year/:month/:day/:title").to(:controller => "posts", :action => "show").name(:article)
+  match("/articles/:year/:month/:day/:title(\.:format)").to(:controller => "posts", :action => "show").name(:article)
 
   # RESTful routes, NOTE some of the post resources are overridden above
   resources :posts
