@@ -2,7 +2,7 @@ require 'syntax/convertors/html'
 
 class Post < Sequel::Model
   is :timestamped
-  has_many :comments
+  has_many :comments, :order => :created_at
   many_to_many :tags
   many_to_many :categories
   
@@ -23,7 +23,7 @@ class Post < Sequel::Model
   def comments_size
     Comment.filter(:post_id => id).count
   end
-
+ 
   def self.find_by_permalink(title)
     filter(:permalink => title).first
   end

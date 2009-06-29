@@ -29,7 +29,7 @@
     -if @post.comments.blank?
       %li#dummy_comment{ :style => "display: none" }
     -else
-      = partial "comments/show", :with => @post.comments.reverse, :as => :comment
+      = partial "comments/show", :with => @post.comments, :as => :comment
 %p{:class => "postmetadata alt"}
   %small= link_to('RSS feed for this post', url(:article, @post.year, @post.month, @post.day, @post.permalink, :format => 'rss'), :title => 'RSS Feed')
 
