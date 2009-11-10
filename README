@@ -27,7 +27,8 @@ To run the cucumber based features you need to...
 > gem sources -a http://gems.github.com  
 > sudo gem install cucumber      
 > sudo gem install webrat   
-> sudo gem install jsmestad-merb_cucumber
+> sudo gem install roman-merb_cucumber
+> rake features
 
 I didn't add these to the dependencies (for bundling) as they are not
 required for production.
