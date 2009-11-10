@@ -9,8 +9,11 @@
   #:socket: /tmp/mysql.sock
 
 :test:
-  <<: *defaults
+  :adapter: postgres
   :database: sample1_test
+  :username: morris
+  :password: test
+  :host: localhost
 
 :production:
   <<: *defaults

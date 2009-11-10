@@ -12,6 +12,10 @@ Merb::Config.use { |c|
 }
 
 Merb::BootLoader.after_app_loads do
-  
+
+  Merb::Cache.setup do
+    register(:default, Merb::Cache::AdhocStore.new)
+  end
+
 end
 

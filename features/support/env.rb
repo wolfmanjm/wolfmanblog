@@ -9,12 +9,13 @@ end
 
 require "merb-core"
 require "spec"
+#require "merb_cucumber/world/simple"
 require "merb_cucumber/world/webrat"
 
 # Uncomment if you want transactional fixtures
 # Merb::Test::World::Base.use_transactional_fixtures
 
-# Quick fix for post features running Rspec error, see 
+# Quick fix for post features running Rspec error, see
 # http://gist.github.com/37930
 def Spec.run? ; true; end
 

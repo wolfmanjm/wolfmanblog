@@ -1,3 +1,10 @@
+NOTE - I am about to rewrite this blog in GRAILS, just for fun ;) The
+cucumber tests don't seem to work anymore withthe latest cucumber
+versions, seems merb and cucumber went in different directions. I
+changed the cucumber tests to use mechanize, so do a real
+over-the-wire integration test which requires merb to be run in test
+mode. I'll check that work in soonish
+
 This is a very basic Blogging engine, specifically written to host
 blog.wolfman.com.
 
@@ -29,6 +36,9 @@ To run the cucumber based features you need to...
 
 I didn't add these to the dependencies (for bundling) as they are not
 required for production.
+
+NOTE that none of the specs work, as I used cucumber to do the testing
+instead, but I left the spec stubs in case I changed my mind.
 
 A note on my feature testing...
 

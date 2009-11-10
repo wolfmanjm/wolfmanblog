@@ -1,14 +1,14 @@
 class Comments < Application
 
   before :ensure_authenticated, :exclude => [:index, :create]
- 
+
   # POST /comments adds a comment to the given post
   def create
     unless params[:test] =~ /^no$/i
       #Merb.logger.error "spam comment: #{params.inspect}"
       raise NotHuman
     end
-	
+
     @post= Post[params[:postid]]
     raise NotFound unless @post
 
@@ -39,8 +39,10 @@ class Comments < Application
   end
 
   private
-  
+
   def flush_cache
+    return if Merb.environment != 'production'
+
     # TODO try to flush just the affected article
     Merb::Cache[:action_store].delete_all!
   end
