@@ -1,9 +1,4 @@
-NOTE - I am about to rewrite this blog in GRAILS, just for fun ;) The
-cucumber tests don't seem to work anymore withthe latest cucumber
-versions, seems merb and cucumber went in different directions. I
-changed the cucumber tests to use mechanize, so do a real
-over-the-wire integration test which requires merb to be run in test
-mode. I'll check that work in soonish
+NOTE - I am about to rewrite this blog in GRAILS, just for fun ;) 
 
 This is a very basic Blogging engine, specifically written to host
 blog.wolfman.com.
