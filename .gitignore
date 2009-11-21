@@ -28,3 +28,4 @@ wolfmanblog.conf
 public/cache/*
 public/files
 .emacs.desktop
+nbproject
