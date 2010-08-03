@@ -2,8 +2,9 @@
 # Helper class to manipulate database directly
 #
 class DBHelper
+  Tables = [:posts, :comments, :tags, :categories, :categories_posts, :posts_tags, :users, :statics]
+  
   attr_reader :db
-
   # setup database access
   def initialize(target=nil, debug=nil)
     if target.nil?
@@ -28,8 +29,15 @@ class DBHelper
     @db.disconnect
   end
 
-  def truncate(table)
-    @db.execute("TRUNCATE #{table.to_s} CASCADE")
+  def clean
+    tables= Tables.collect {|t| t.to_s}
+    @db.execute("TRUNCATE #{tables.join(',')} CASCADE")
+    @db.execute("ALTER SEQUENCE posts_id_seq RESTART WITH 1")
+  end
+  
+  def truncate(*table)
+    tables= table.collect {|t| t.to_s}
+    @db.execute("TRUNCATE #{tables.join(',')} CASCADE")
   end
 
   def add_user(name, password, salt)
@@ -45,13 +53,13 @@ class DBHelper
   end
 
   def tag_post(postid, tag)
-    r= @db[:tags].filter(:name => tag)
+    r= @db[:tags].filter(:name => tag).first
     id= r.nil? ? @db[:tags].insert(:name => tag) : r[:id]
     @db[:posts_tags] << {:post_id => postid, :tag_id => id}
   end
 
   def categorize_post(postid, cat)
-    r= @db[:categories].filter(:name => cat)
+    r= @db[:categories].filter(:name => cat).first
     id= r.nil? ? @db[:categories].insert(:name => cat) : r[:id]
     @db[:categories_posts] << {:post_id => postid, :category_id => id}
   end

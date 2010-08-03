@@ -24,6 +24,7 @@ Merb.start_environment(:testing => true, :adapter => 'runner', :environment => E
 # runs before each Scenario
 Before do
   @dbhelper= DBHelper.new('test', false)
+  @dbhelper.clean
 end
 
 After do

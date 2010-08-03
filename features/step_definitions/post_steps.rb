@@ -1,6 +1,5 @@
 # creates n posts
-Given /^(\d+) posts exist$/ do |n|
-  @dbhelper.truncate(:posts)
+Given /^(\d+) posts? exists?$/ do |n|
   for i in (1..n.to_i) do
     @dbhelper.add_post(:id => i, :title => "post #{i}", :body => "body of post #{i}", :permalink => "post-#{i}")
   end
@@ -41,4 +40,28 @@ Then /^I should (not)? ?see the comment$/ do |t|
     @response.should_not have_selector(comment_user)
     @response.should_not have_selector(comment_body)
   end
+end
+
+Given /^post (\d+) is tagged "([^\"]*)"$/ do |id, tags|
+  a= tags.split(',')
+  a.each do |t|
+    @dbhelper.tag_post(id.to_i, t.strip)
+  end
+end
+
+Given /^post (\d+) has category "([^\"]*)"$/ do |id, cats|
+  a= cats.split(',')
+  a.each do |t|
+    @dbhelper.categorize_post(id.to_i, t.strip)
+  end
+end
+
+Then /^the post is tagged "([^\"]*)"$/ do |tags|
+  tags= tags.split(',').collect{ |t| t.strip }.join(',')
+  @response.should have_selector("p.meta:contains('#{tags}')")
+end
+
+Then /^the post is in category "([^\"]*)"$/ do |cats|
+  cats= cats.split(',').collect{ |t| t.strip }.join(',')
+  @response.should have_selector("p.meta:contains('#{cats}')")
 end
